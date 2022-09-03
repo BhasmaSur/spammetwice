@@ -1,14 +1,26 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+import React from "react";
+import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
 import './index.css';
 import App from './App';
+import store from "./web/redux/store";
 import reportWebVitals from './reportWebVitals';
+import { ThemeProvider } from '@mui/material';
+import { QueryClient, QueryClientProvider, theme } from './common';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+const queryClient = new QueryClient()
+
+ReactDOM.render(
   <React.StrictMode>
-    <App />
-  </React.StrictMode>
+    <Provider store={store}>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider theme={theme}>
+        <App />
+        </ThemeProvider>
+      </QueryClientProvider>
+    </Provider>
+  </React.StrictMode>,
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function
