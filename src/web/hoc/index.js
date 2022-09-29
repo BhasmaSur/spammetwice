@@ -1,3 +1,3 @@
 import Layout from './layout'
-
-export { Layout }; 
+import FreeLayout from './free-layout';
+export { Layout, FreeLayout }; 

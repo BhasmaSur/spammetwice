@@ -30,15 +30,14 @@ const AddSpamTemplate = () => {
       active : 1,
       descriptionEntityList : createDescriptionEntityList()
     };
-    httpService('spam/add','post',newSpamObject).then((res)=>{
+    httpService('add','post',newSpamObject, "spam").then((res)=>{
       if(res){
         console.log("spam saved successfully",res)
       }
     })
   }
   const handleTitleChange = (event) => {
-    //show all the similar spams to help in selecting the spams, if not found click on Add new spam
-    setTitle(event.target.value);
+    setTitle(event);
   };
   const itemHandler = (type) => {
     if(type === BUTTON_TYPE.SAVE){
@@ -78,7 +77,7 @@ const AddSpamTemplate = () => {
 
   const handleVideoChange = (url,itemNumber)=>{
     let updatedSpamContent = [...spamContent];
-    updatedSpamContent[itemNumber].content = "https://www.youtube.com/watch?v=07d2dXHYb94";
+    updatedSpamContent[itemNumber].content = url;
     setSpamContent(updatedSpamContent);
   }
 
@@ -136,7 +135,7 @@ const AddSpamTemplate = () => {
     }
   };
   return (
-    <Grid container alignItems="center" justifyContent="center">
+    <Grid container alignItems="center" justifyContent="center" sx={{minHeight:"65vh"}}>
       <Grid item xs={12} sm={6}>
         <Box m={2}>
           <InputField
@@ -152,7 +151,7 @@ const AddSpamTemplate = () => {
             return getItemType(item,index)
           })}
         </form>
-        <Box m={1}>
+        <Box m={1} mb={10}>
           <AddFields itemHandler={itemHandler}/>
         </Box>
       </Grid>

@@ -10,12 +10,13 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <Grid
+      bottom={0}
       container
       rowSpacing={1}
       justifyContent="center"
       direction="column"
       sx={{
-        position: "absolute",
+        position: "relative",
         left: 0,
         bottom: 0,
         paddingBottom: 3,

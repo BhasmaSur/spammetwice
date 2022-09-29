@@ -105,6 +105,7 @@ const AllRoute = () => {
         <Route path="/signup" element={<SignUp />} exact />
         <Route path="/test" element={<Test />} exact />
         <Route path="/circular-progress" element={<LoadingScreen />} exact />
+        <Route path="/" element={<Home />} exact/>
         <Route path="/*" element={<GuardedRoutes />} />
       </Routes>
     </Router>

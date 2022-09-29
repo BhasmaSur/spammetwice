@@ -17,15 +17,14 @@ import {
   MoreIcon,
   HomeIcon,
   PlaylistRemoveIcon,
+  PrecisionManufacturingIcon,
   Tooltip,
+  GroupsIcon,
   DeleteIcon,
   AddIcon,
   Button,
 } from "../..";
-import {
-  SearchBar,
-  SearchIconWrapper,
-} from "../../components/search-bar";
+import { SearchBar, SearchIconWrapper } from "../../components/search-bar";
 import MobileMenu from "./menu";
 import NestedMenu from "./nested-menu";
 import Drawer from "./drawer";
@@ -51,9 +50,7 @@ export default function PrimarySearchAppBar() {
     handleMobileMenuClose();
   };
 
-  const handleMobileMenuClose = () =>{
-
-  }
+  const handleMobileMenuClose = () => {};
 
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
@@ -67,6 +64,7 @@ export default function PrimarySearchAppBar() {
   };
 
   const searchRelavantSpam = (event) => {
+    console.log("menu")
     setReturnedValues((preV) => [...preV, event.target.value]);
   };
   return (
@@ -85,7 +83,7 @@ export default function PrimarySearchAppBar() {
             <MenuIcon />
           </IconButton>
           <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ display: { xs: "none", md: "flex" } }}>
+          <Box mr={2} sx={{ display: { xs: "none", md: "flex" } }}>
             <Typography
               mt={1}
               variant="h5"
@@ -108,6 +106,19 @@ export default function PrimarySearchAppBar() {
                 <HomeIcon />
               </IconButton>
             </Tooltip>
+            <Tooltip title="Product">
+              <IconButton
+                size="large"
+                edge="end"
+                aria-label="account of current user"
+                aria-controls={menuId}
+                aria-haspopup="true"
+                onClick={redirectToHome}
+                color="inherit"
+              >
+                <PrecisionManufacturingIcon />
+              </IconButton>
+            </Tooltip>
             <Tooltip title="Reported Sites">
               <IconButton
                 size="large"
@@ -121,9 +132,22 @@ export default function PrimarySearchAppBar() {
                 <PlaylistRemoveIcon />
               </IconButton>
             </Tooltip>
+            <Tooltip title="Our Team">
+              <IconButton
+                size="large"
+                edge="end"
+                aria-label="account of current user"
+                aria-controls={menuId}
+                aria-haspopup="true"
+                onClick={redirectToHome}
+                color="inherit"
+              >
+                <GroupsIcon />
+              </IconButton>
+            </Tooltip>
           </Box>
-          <Box >
-            <SearchBar/>
+          <Box sx={{ flexGrow: 1 }}>
+            <SearchBar />
           </Box>
           <Box>
             <Tooltip title="Post Scam">
@@ -170,14 +194,13 @@ export default function PrimarySearchAppBar() {
         setMobileMoreAnchorEl={setMobileMoreAnchorEl}
       />
       {/* <NestedMenu anchorEl={anchorEl} setAnchorEl={setAnchorEl}/> */}
-      {returnedValues.length > 0 &&
-      (
-          <div className="testing">
-            {returnedValues.map((reV) => {
-              return <div>{reV}</div>;
-            })}
-          </div>
-        )}
+      {returnedValues.length > 0 && (
+        <div className="testing">
+          {returnedValues.map((reV) => {
+            return <div>{reV}</div>;
+          })}
+        </div>
+      )}
     </Box>
   );
 }

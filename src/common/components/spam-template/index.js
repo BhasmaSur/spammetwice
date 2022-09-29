@@ -48,16 +48,16 @@ console.log("similarSpams : ", similarSpams)
         <Box sx={{ width: "100%" }}>
           <Typography variant="h1">{spamData.title}</Typography>
           {spamData.descriptionEntityList.map((desc) => getTheDescription(desc))}
-          <Box mt={3}>
+          {/* <Box mt={3}>
             <Typography align="left" variant="h1">
               Resolution : lol
             </Typography>
-          </Box>
+          </Box> */}
         </Box>
       </Grid>
       <Grid m={2} item sm={3} xs={11}>
         <Typography align="left" variant="h1">
-          Similar Spams
+          
         </Typography>
         {similarSpams.map((sS) => {
           return (

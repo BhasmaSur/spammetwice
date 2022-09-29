@@ -1,15 +1,24 @@
 import React, { useState } from "react";
 import { Box, Button, Grid, IconButton, DeleteIcon } from "../..";
+import { httpService } from "../../service-utils";
 const UploadImageBox = ({handleChange,handleDelete,itemNumber}) => {
   const [fileSelected, setFileSelected] = useState(null);
   const fileSelectedHandler = (event) => {
     setFileSelected(event.target.files[0])
   };
-  const uploadFile = () => {
-    console.log("file selected : ", fileSelected)
+  const uploadFile = (event) => {
+    const formData = new FormData();
+    formData.append(
+      "myFile",
+      fileSelected,
+      fileSelected.name
+    )
     //retrurn url of the file uploaded
-    let url = "https://thumbs.dreamstime.com/z/spam-electronic-spamming-computer-generated-image-d-render-64403295.jpg";
-    handleChange(url,itemNumber)
+    httpService("file/upload","post",formData,"spam").then((src)=>{
+      if(src?.data.status === 200){
+        handleChange(src.data.result,itemNumber)
+      }
+    })
   };
   return (
     <Grid container>

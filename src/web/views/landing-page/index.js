@@ -8,11 +8,6 @@ export const LandingPage = () => {
   const [data,setData] = useState(null)
   const location = useLocation();
   const spamId = location.state?.spamId;
-  httpService('search?spamId=' + spamId,'get',null,"spam").then((res)=>{
-    if(res){
-      console.log("result of api : ", res)
-    }
-  })
   const fetchSpam = async ()=>{
     console.log("spamId : ", spamId)
     const res = await httpService('search?spamId=' + spamId,'get',null,"spam")
