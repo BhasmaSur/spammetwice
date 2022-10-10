@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useRef } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import ClearIcon from "@mui/icons-material/Clear";
+import { searchData } from "../../demo-data";
 import {
   IconButton,
   InputBase,
@@ -12,16 +13,28 @@ import {
 } from "@mui/material";
 import { httpService } from "../../service-utils";
 import { useNavigate } from "react-router-dom";
+import { clear } from "@testing-library/user-event/dist/clear";
 
 const SearchBar = () => {
+
+  console.log("Redering search");
+
+  const ref = useRef(null)
+
   const [suggestion, setSuggestion] = React.useState([]);
   const [wordEntered, setWordEntered] = React.useState("");
+  /*
   const historyHook = useNavigate();
-  const handleSpamSelected = (spam) =>{
+  const handleSpamSelected = (spam) => {
     setSuggestion([]);
-    historyHook("/spam",{state:{spamId: spam}})
-  }
+    historyHook("/spam", { state: { spamId: spam } });
+  };
+
+  */
+
+  
   const debounce = (func, time) => {
+    console.log("Debounce called");
     let timer;
     return function () {
       let context = this,
@@ -34,10 +47,24 @@ const SearchBar = () => {
   };
 
   const handleFilter = (event) => {
+    console.log("Handle Filter");
+    
     let word = event.target.value;
-    if (word === "") {
+    console.log(word);
+    if ( word === undefined || word === "" ) {
       setSuggestion([]);
-    } else {
+    } 
+    else {
+      const newFilter = searchData.filter((value) => {
+        return value.title.toLowerCase().includes(word.toLowerCase());
+        //add API here
+        
+      });
+      
+      setSuggestion(newFilter);
+      
+    }
+    /*else {
       let spamsReturned = [];
       httpService("search/" + word, "get", null, "spam").then((src) => {
         if (src.data.status === 200) {
@@ -46,9 +73,10 @@ const SearchBar = () => {
         }
       });
     }
+    */
   };
 
-  const debounceCB = React.useCallback(debounce(handleFilter, 700), []);
+  const debounceCB = React.useCallback(debounce(handleFilter, 800), []);
 
   const clearBar = () => {
     setSuggestion([]);
@@ -56,15 +84,29 @@ const SearchBar = () => {
   };
 
   React.useEffect(() => {
-    window.addEventListener("keyup", debounceCB);
+    /**
+     * Alert if clicked
+     *  on outside of element
+     */
+
+     console.log("useEffect");
+    function handleClickOutside(event) {
+      if (ref.current && !ref.current.contains(event.target)) {
+        setSuggestion([]);
+      }
+    }
+    // Bind the event listener
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      window.removeEventListener("keyup", debounceCB);
+      // Unbind the event listener on clean up
+      document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [wordEntered]);
+  }, [ref]);
 
   return (
     <div>
       <Paper
+        ref={ref}
         elevation={0}
         component="form"
         sx={{
@@ -77,13 +119,38 @@ const SearchBar = () => {
         <SearchIcon sx={{ p: "1px 1px" }} />
 
         <InputBase
+          
           sx={{ ml: 1, flex: 1, p: "1px 1px" }}
           placeholder="Search any Spam!"
           type="text"
           value={wordEntered}
-          onChange={(e) => {
-            setWordEntered(e.target.value);
+          onKeyUp={(e) => {
+            if(e.target.value !== undefined && e.target.value !== "")
+              {
+                console.log("OnKeyUp");
+                debounceCB(e);
+              }
+              
           }}
+          onClick={
+            (e) => {
+              if(e.target.value !== undefined && e.target.value !== "")
+                {
+                  console.log("onClick");
+                  //debounceCB(e);
+                  handleFilter(e);
+                }
+                
+            }
+          }
+          onChange={(e) => {
+            
+                console.log("onChange");
+                setWordEntered(e.target.value);
+                if(e.target.value == undefined || e.target.value.length == 0)
+                  clearBar()
+          }}
+          
         />
         {wordEntered.length > 0 && (
           <IconButton
@@ -116,14 +183,18 @@ const SearchBar = () => {
             return (
               <div>
                 <ListItemButton
-                  dense="true"
+                  
+                  //dense="true"
                   sx={{
                     fontSize: "2px",
                     padding: 0,
                   }}
                 >
                   <ListItem alignItems="flex-start">
-                    <ListItemText onClick={()=>handleSpamSelected(value.spamId)} primary={value.title} />
+                    <ListItemText
+                      //onClick={() => handleSpamSelected(value.spamId)}
+                      primary={value.title}
+                    />
                   </ListItem>
                 </ListItemButton>
               </div>
