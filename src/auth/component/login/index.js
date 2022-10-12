@@ -29,7 +29,7 @@ const IdpLogin = (props) => {
   const historyHook = useNavigate();
 
   const handleSignUp = () =>{
-    historyHook("/home")
+    historyHook("/signup")
   }
 
   const verifyUser = async() => {

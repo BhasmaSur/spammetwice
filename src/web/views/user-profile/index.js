@@ -18,9 +18,14 @@ import {
   IconButton,
   useQuery,
 } from "../../../common";
+import { auth } from "../../../auth";
 import { httpService } from "../../../common/service-utils";
+import EditUserProfile from "../edit-user-profile";
 
 const UserProfile = () => {
+  const { getSessionData } = auth();
+  const { user } = getSessionData();
+  const [editProfile, setEditProfile] = useState(false);
   const { spams, tags, activity, userHighligts } = profile_data;
   const [userProfileData, setUserProfileData] = useState();
   
@@ -107,7 +112,7 @@ const UserProfile = () => {
             <WorkIcon />
           </IconButton>
           <Typography mt={1} align="left" variant="subtitle1">
-            {data?.result.bio}
+            {data?.result.work || "Enter about your profession"}
           </Typography>
         </Stack>
         <Stack direction="row">
@@ -115,7 +120,7 @@ const UserProfile = () => {
             < SchoolIcon/>
           </IconButton>
           <Typography mt={1} align="left" variant="subtitle1">
-            {data?.result.education}
+            {data?.result.education || "Enter about your education"}
           </Typography>
         </Stack>
         <Stack direction="row">
@@ -123,7 +128,7 @@ const UserProfile = () => {
             <LocationOnIcon />
           </IconButton>
           <Typography mt={1} align="left" variant="subtitle1">
-            {data?.result.location}
+            {data?.result.location || "Select your location"}
           </Typography>
         </Stack>
       </Box>
@@ -160,9 +165,12 @@ const UserProfile = () => {
               sx={{ width: 120, height: 120 }}
             />
             <Stack direction="column">
-              <Typography variant="h45">{data?.result.username}</Typography>
+              <Typography variant="h45">{data?.result.username || user.userName}</Typography>
               <Typography align="left" variant="subtitle1">
-                {data?.result.bio}
+                {data?.result.bio || "About You"}
+              </Typography>
+              <Typography align="left" variant="subtitle1">
+                {data?.result.email || user.email}
               </Typography>
               <Stack direction="row">
                 <Typography variant="subtitle2" spacing={1}>
@@ -175,14 +183,15 @@ const UserProfile = () => {
         <Box sx={{ width: "100%" }} mt={2}>
           <Stack direction="column">
             <Typography align="left" variant="subtitle2">
-              {data?.result.about}
+              {data?.result.about || "favourite quote"}
             </Typography>
-            <Typography color="text.disabled" align="left" variant="subtitle1">
-              Edit
+            <Typography onClick={()=>setEditProfile(!editProfile)} color="text.disabled" align="left" variant="subtitle1">
+              Edit Profile
             </Typography>
+            <EditUserProfile open = {editProfile} handleClose={setEditProfile} profileDetails={data?.result}/>
           </Stack>
         </Box>
-        <Box sx={{ width: "100%" }} mt={7} mb={1}>
+        { "work" && <><Box sx={{ width: "100%" }} mt={7} mb={1}>
           <Stack direction="row">
             <Link
               href="#"
@@ -212,7 +221,7 @@ const UserProfile = () => {
         <Divider />
         <Box sx={{ width: "100%" }} mt={2} mb={2}>
           {getTabDataSelected()}
-        </Box>
+        </Box></>}
       </Grid>
       <Grid m={2} item sm={3} xs={11}>
         <Typography
