@@ -2,6 +2,7 @@ import React from "react";
 import { Box, Typography, uuidv4, Link, FirstAd,Grid } from "../..";
 import { SecondAd } from "../ads";
 import { DESCRIPTION_TYPE } from "../../utils/constants";
+import SpamMetaData from "../spam-metadata";
 
 export default function SpamTemplate({ spamData,similarSpams }) {
   // const { title, descriptionEntityList, resolution, similarSpams } = props;
@@ -46,7 +47,8 @@ console.log("similarSpams : ", similarSpams)
       <Grid item sm={2} xs={0}></Grid>
       <Grid m={2} item sm={5} xs={11}>
         <Box sx={{ width: "100%" }}>
-          <Typography variant="h1">{spamData.title}</Typography>
+          <Typography align="left" variant="h1">{spamData.title}</Typography>
+          <SpamMetaData/>
           {spamData.descriptionEntityList.map((desc) => getTheDescription(desc))}
           {/* <Box mt={3}>
             <Typography align="left" variant="h1">

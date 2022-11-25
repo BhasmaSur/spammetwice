@@ -6,10 +6,12 @@ import UploadImageBox from "../upload-img-box";
 import {InputField,RemovableInputField} from "../input-field/";
 import { BUTTON_TYPE, DESCRIPTION_TYPE } from "../../utils/constants";
 import { httpService } from "../../service-utils";
+import { useNavigate } from "react-router-dom";
+
 const AddSpamTemplate = () => {
   const [title,setTitle] = useState("");
   const [spamContent, setSpamContent] = useState([]);
-
+  const historyHook = useNavigate();
   const createDescriptionEntityList = () =>{
     let descriptionList = [];
     spamContent.map((desc)=>{
@@ -32,7 +34,8 @@ const AddSpamTemplate = () => {
     };
     httpService('add','post',newSpamObject, "spam").then((res)=>{
       if(res){
-        console.log("spam saved successfully",res)
+        alert("spam saved successfully")
+        historyHook("/spam", { state: { spamId: res?.data.spamId } });
       }
     })
   }

@@ -1121,4 +1121,47 @@ const data = {
       "year": 1951
     }
   ]
-  export { data,profile_data,searchData }
+
+  const spamsList = [
+  {
+    spamId: "SPAM_001",
+    title: "asbdhbas ajsd asj dasjdvas djsavdjas djbsajd sajdbjsa djsavdbjhas",
+  },
+  {
+    spamId: "SPAM_002",
+    title: "asbdhbas ajsd asj dasjdvas djsavdjas djbsajd sajdbjsa djsavdbjhas",
+  },
+  {
+    spamId: "SPAM_003",
+    title: "asbdhbas ajsd asj dasjdvas djsavdjas djbsajd sajdbjsa djsavdbjhas sdfdfsf sdfsf sdfsfs sdfsfsf sdfsdfsd sdfsdfdsf sdfsdf",
+  },
+  {
+    spamId: "SPAM_003",
+    title: "asbdhbas ajsd asj dasjdvas djsavdjas djbsajd sajdbjsa djsavdbjhas sdfdfsf sdfsf sdfsfs sdfsfsf sdfsdfsd sdfsdfdsf sdfsdf",
+  },
+  {
+    spamId: "SPAM_003",
+    title: "asbdhbas ajsd asj dasjdvas djsavdjas djbsajd sajdbjsa djsavdbjhas sdfdfsf sdfsf sdfsfs sdfsfsf sdfsdfsd sdfsdfdsf sdfsdf",
+  },
+  {
+    spamId: "SPAM_003",
+    title: "asbdhbas ajsd asj dasjdvas djsavdjas djbsajd sajdbjsa djsavdbjhas sdfdfsf sdfsf sdfsfs sdfsfsf sdfsdfsd sdfsdfdsf sdfsdf",
+  },
+  {
+    spamId: "SPAM_003",
+    title: "asbdhbas ajsd asj dasjdvas djsavdjas djbsajd sajdbjsa djsavdbjhas sdfdfsf sdfsf sdfsfs sdfsfsf sdfsdfsd sdfsdfdsf sdfsdf",
+  },
+  {
+    spamId: "SPAM_003",
+    title: "asbdhbas ajsd asj dasjdvas djsavdjas djbsajd sajdbjsa djsavdbjhas sdfdfsf sdfsf sdfsfs sdfsfsf sdfsdfsd sdfsdfdsf sdfsdf",
+  },
+  {
+    spamId: "SPAM_003",
+    title: "asbdhbas ajsd asj dasjdvas djsavdjas djbsajd sajdbjsa djsavdbjhas sdfdfsf sdfsf sdfsfs sdfsfsf sdfsdfsd sdfsdfdsf sdfsdf",
+  },
+  {
+    spamId: "SPAM_003",
+    title: "asbdhbas ajsd asj dasjdvas djsavdjas djbsajd sajdbjsa djsavdbjhas sdfdfsf sdfsf sdfsfs sdfsfsf sdfsdfsd sdfsdfdsf sdfsdf",
+  }
+];
+  export { data,profile_data,searchData,spamsList }

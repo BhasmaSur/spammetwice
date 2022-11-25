@@ -59,6 +59,10 @@ export default function PrimarySearchAppBar() {
   const redirectToHome = () => {
     historyHook("/home");
   };
+
+  const redirectToOurTeam = () =>{
+    historyHook("/our-team")
+  }
   const hendleReportedList = () => {
     historyHook("/reported-sites");
   };
@@ -139,7 +143,7 @@ export default function PrimarySearchAppBar() {
                 aria-label="account of current user"
                 aria-controls={menuId}
                 aria-haspopup="true"
-                onClick={redirectToHome}
+                onClick={redirectToOurTeam}
                 color="inherit"
               >
                 <GroupsIcon />

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   CustomTable,
@@ -8,16 +8,18 @@ import {
   Typography,
   Grid,
 } from "../../../common";
+import SiteModal from "../../../common/components/site-modal";
+import { httpService } from "../../../common/service-utils";
 
-function createData(name, url, reported, actions, status) {
-  return { name, url, reported, actions, status };
+function createData(name, url, reported, actions) {
+  return { name, url, reported, actions };
 }
 const columns = [
   { id: "name", label: "Name", minWidth: 170 },
   { id: "url", label: "Url", minWidth: 100, align: "center" },
   {
     id: "reported",
-    label: "Times Reported",
+    label: "Reported",
     minWidth: 170,
     align: "center",
     format: (value) => value.toLocaleString("en-US"),
@@ -27,74 +29,54 @@ const columns = [
     label: "Actions",
     minWidth: 170,
     align: "center",
-    type: "drop-down",
     format: (value) => value.toLocaleString("en-US"),
   },
-  {
-    id: "status",
-    label: "Status",
-    minWidth: 170,
-    align: "right",
-    format: (value) => value.toLocaleString("en-US"),
-  },
-];
-
-//   const rows = [
-//     createData('India', 'IN', 1324171354, 3287263),
-//     createData('China', 'CN', 1403500365, 9596961),
-//     createData('Italy', 'IT', 60483973, 301340),
-//     createData('United States', 'US', 327167434, 9833520),
-//     createData('Canada', 'CA', 37602103, 9984670),
-//     createData('Australia', 'AU', 25475400, 7692024),
-//     createData('Germany', 'DE', 83019200, 357578),
-//     createData('Ireland', 'IE', 4857000, 70273),
-//     createData('Mexico', 'MX', 126577691, 1972550),
-//     createData('Japan', 'JP', 126317000, 377973),
-//     createData('France', 'FR', 67022000, 640679),
-//     createData('United Kingdom', 'GB', 67545757, 242495),
-//     createData('Russia', 'RU', 146793744, 17098246),
-//     createData('Nigeria', 'NG', 200962417, 923768),
-//     createData('Brazil', 'BR', 210147125, 8515767),
-//   ];
-
-const headerList = ["Sr No.", "Name", "Url", "Times Reported", "Action"];
-
-const actionsList = ["View report card", "Add new spam", "Rechecking"];
-const rows = [
-  createData("Niyasa", "https://www.sdadad.com/", 24, "voew", "fake"),
-  createData("Niyasa", "https://www.sdadad.com/", 24, "voew", "fake"),
-  createData("Niyasa", "https://www.sdadad.com/", 24, "voew", "fake"),
-  createData("Niyasa", "https://www.sdadad.com/", 24, "voew", "fake"),
-  createData("Niyasa", "https://www.sdadad.com/", 24, "voew", "fake"),
-  createData("Niyasa", "https://www.sdadad.com/", 24, "voew", "fake"),
-  createData("Niyasa", "https://www.sdadad.com/", 24, "voew", "fake"),
-  createData("Niyasa", "https://www.sdadad.com/", 24, "voew", "fake"),
-  createData("Niyasa", "https://www.sdadad.com/", 24, "voew", "fake"),
-  createData("Niyasa", "https://www.sdadad.com/", 24, "voew", "fake"),
-  createData("Niyasa", "https://www.sdadad.com/", 24, "voew", "fake"),
-  createData("Niyasa", "https://www.sdadad.com/", 24, "voew", "fake"),
-  createData("Niyasa", "https://www.sdadad.com/", 24, "voew", "fake"),
-  createData("Niyasa", "https://www.sdadad.com/", 24, "voew", "fake"),
-  createData("Niyasa", "https://www.sdadad.com/", 24, "voew", "fake"),
-  createData("Niyasa", "https://www.sdadad.com/", 24, "voew", "fake"),
-  createData("Niyasa", "https://www.sdadad.com/", 24, "voew", "fake"),
-  createData("Niyasa", "https://www.sdadad.com/", 24, "voew", "fake"),
-  createData("Niyasa", "https://www.sdadad.com/", 24, "voew", "fake"),
-  createData("Niyasa", "https://www.sdadad.com/", 24, "voew", "fake"),
 ];
 
 const ReportedSitesList = () => {
+  const [rows, setRows] = useState([]);
+  const [open, setOpen] = useState(false);
+  const [siteSelected, setSiteSelected] = useState({});
+  const returnNameFromUrl = (baseUrl) => {
+    return baseUrl.split("//")[1].split(".")[0];
+  };
+
+  const rowClicked = (rowSelected) => {
+    setSiteSelected(rowSelected);
+    setOpen(true);
+  };
+
+  useEffect(() => {
+    httpService("reported-sites","get",null, "spam" ).then((src)=>{
+      if(src){
+        const tempRows = src.data.result.map((site)=>{
+          return createData(returnNameFromUrl(site.baseUrl),site.baseUrl,site.occurance, "View Spam")
+        })
+        setRows(tempRows)
+      }
+    })
+    // const tempRows = [createData("nasa", "https://nasa.com", 24, "View Spam"),
+    // ];
+    // setRows(tempRows);
+  }, []);
   return (
-    <Grid container alignItems="center" justifyContent="center">
+    <Grid sx={{minHeight:"550px" }} container alignItems="center" justifyContent="center">
       <Grid item xs={12} sm={8}>
-        <Typography variant="h5">List of Reported Sites</Typography>
+        <Typography mt={5} mb={5} variant="h5">
+          List of Reported Pages
+        </Typography>
         <Box sx={{ display: { xs: "none", sm: "none", md: "block" } }}>
-          <CustomTable rows={rows} columns={columns} />
+          <CustomTable rows={rows} columns={columns} rowClicked={rowClicked} />
         </Box>
         <Box sx={{ display: { xs: "block", md: "none" } }}>
-          <RowBox rows={rows} columns={columns} />
+          <RowBox rows={rows} columns={columns} rowClicked={rowClicked} />
         </Box>
       </Grid>
+      {open && <SiteModal
+        open={open}
+        handleClose={setOpen}
+        siteSelected={siteSelected}
+      />}
     </Grid>
   );
 };

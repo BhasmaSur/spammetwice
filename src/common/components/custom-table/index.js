@@ -10,7 +10,7 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { uuidv4 } from "../..";
 
-const CustomTable = ({ rows, columns }) => {
+const CustomTable = ({ rows, columns, rowClicked }) => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(100);
 
@@ -27,14 +27,15 @@ const CustomTable = ({ rows, columns }) => {
       <TableContainer sx={{ maxHeight: "100%" }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
-            <TableRow key={uuidv4()}>
+            <TableRow key={uuidv4()}
+            >
               {columns.map((column) => (
                 <TableCell
                   key={uuidv4()}
                   align={column.align}
                   style={{ minWidth: column.minWidth }}
                 >
-                  <Typography variant="h6">{column.label}</Typography>
+                  <Typography variant="h5">{column.label}</Typography>
                 </TableCell>
               ))}
             </TableRow>
@@ -44,7 +45,7 @@ const CustomTable = ({ rows, columns }) => {
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => {
                 return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={uuidv4()}>
+                  <TableRow onClick={()=>rowClicked(row)} hover role="checkbox" tabIndex={-1} key={uuidv4()}>
                     {columns.map((column) => {
                       const value = row[column.id];
                       return (

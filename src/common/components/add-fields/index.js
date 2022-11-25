@@ -42,13 +42,13 @@ const AddFields = ({ itemHandler }) => {
       >
         Add URL
       </Button>
-      <Button
+      {/* <Button
         color="success"
         variant="contained"
         onClick={() => itemHandler(DESCRIPTION_TYPE.VIDEO)}
       >
         Add Video
-      </Button>
+      </Button> */}
       <Button
         sx={{ borderTopRightRadius: "30px", borderBottomRightRadius: "30px" }}
         color="warning"

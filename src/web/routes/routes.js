@@ -22,6 +22,7 @@ import {LoadingScreen} from "../../common";
 import ReportedSitesList from "../views/reported-sites";
 import UserProfile from "../views/user-profile";
 import LinksPage from "../views/links-page";
+import OurTeam from "../views/our-team";
 
 const GuardedRoutesBehindFeatureFlag = () => {
   const flags = {
@@ -32,6 +33,7 @@ const GuardedRoutesBehindFeatureFlag = () => {
     <Layout flags={flags}>
       <Routes>
         <Route path="/admin-page" element={<Test />} exact />
+        <Route path="/our-team" element={<OurTeam />} exact />
         <Route path="/spam-page" element={<LandingPage />} exact />
         <Route path="/add-spam" element={<AddSpam />} exact />
         <Route path="/reported-sites" element={<ReportedSitesList />} exact />
@@ -100,10 +102,11 @@ const AllRoute = () => {
       <Routes>
         <Route path="/spam" element={<Question />} exact />
         <Route path="/links" element={<LinksPage />} exact />
+        {/* <Route path="/our-team" element={<OurTeam />} exact /> */}
         <Route path="/home" element={<Home />} exact />
         <Route path="/login" element={<Login />} exact />
         <Route path="/signup" element={<SignUp />} exact />
-        <Route path="/test" element={<Test />} exact />
+        <Route path="/test" element={<ReportedSitesList />} exact />
         <Route path="/circular-progress" element={<LoadingScreen />} exact />
         <Route path="/" element={<Home />} exact/>
         <Route path="/*" element={<GuardedRoutes />} />

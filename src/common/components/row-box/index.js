@@ -9,7 +9,7 @@ import {
 } from "../..";
 import React from "react";
 
-const RowBox = ({ rows, columns }) => {
+const RowBox = ({ rows, columns, rowClicked }) => {
 
   const handleChange =()=>{
 
@@ -41,12 +41,12 @@ const RowBox = ({ rows, columns }) => {
       );
     }
   };
-  console.log(rows, columns);
+
   return (
     <Box p={1}>
       {rows.map((row) => {
         return (
-          <Paper elevation={3} key={uuidv4()}>
+          <Paper elevation={3} key={uuidv4()} onClick={()=>rowClicked(row)}>
             <Grid mt={1} p={1} container>
               {columns.map((col) => {
                 return (

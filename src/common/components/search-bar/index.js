@@ -11,9 +11,9 @@ import {
   ListItemText,
   Paper,
 } from "@mui/material";
+import { uuidv4 } from "../..";
 import { httpService } from "../../service-utils";
 import { useNavigate } from "react-router-dom";
-import { clear } from "@testing-library/user-event/dist/clear";
 
 const SearchBar = () => {
 
@@ -23,16 +23,13 @@ const SearchBar = () => {
 
   const [suggestion, setSuggestion] = React.useState([]);
   const [wordEntered, setWordEntered] = React.useState("");
-  /*
   const historyHook = useNavigate();
   const handleSpamSelected = (spam) => {
+    console.log("spam here", spam)
     setSuggestion([]);
+    
     historyHook("/spam", { state: { spamId: spam } });
   };
-
-  */
-
-  
   const debounce = (func, time) => {
     console.log("Debounce called");
     let timer;
@@ -54,17 +51,17 @@ const SearchBar = () => {
     if ( word === undefined || word === "" ) {
       setSuggestion([]);
     } 
-    else {
-      const newFilter = searchData.filter((value) => {
-        return value.title.toLowerCase().includes(word.toLowerCase());
-        //add API here
+    // else {
+    //   const newFilter = searchData.filter((value) => {
+    //     return value.title.toLowerCase().includes(word.toLowerCase());
+    //     //add API here
         
-      });
+    //   });
       
-      setSuggestion(newFilter);
+    //   setSuggestion(newFilter);
       
-    }
-    /*else {
+    // }
+    else {
       let spamsReturned = [];
       httpService("search/" + word, "get", null, "spam").then((src) => {
         if (src.data.status === 200) {
@@ -73,7 +70,6 @@ const SearchBar = () => {
         }
       });
     }
-    */
   };
 
   const debounceCB = React.useCallback(debounce(handleFilter, 800), []);
@@ -181,10 +177,11 @@ const SearchBar = () => {
         >
           {suggestion.map((value, key) => {
             return (
-              <div>
+              <div
+              key={uuidv4()}
+              >
                 <ListItemButton
-                  
-                  //dense="true"
+                  dense="true"
                   sx={{
                     fontSize: "2px",
                     padding: 0,
@@ -192,8 +189,11 @@ const SearchBar = () => {
                 >
                   <ListItem alignItems="flex-start">
                     <ListItemText
-                      //onClick={() => handleSpamSelected(value.spamId)}
                       primary={value.title}
+                      onClick={() =>{
+                        console.log("testing")
+                        handleSpamSelected(value.spamId)
+                      }}
                     />
                   </ListItem>
                 </ListItemButton>

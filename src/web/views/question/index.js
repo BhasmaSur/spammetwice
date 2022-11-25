@@ -3,10 +3,10 @@ import { BLNavbar } from "../../../common/components/navbar-before-login";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../../../auth";
 import SpamTemplate from "../../../common/components/spam-template";
-import {useQuery} from "../../../common";
 import { httpService } from "../../../common/service-utils";
 import Footer from "../../hoc/layout/footer";
 import {useLocation} from 'react-router-dom';
+import FamousSpams from "../../../common/components/famous-spams";
 const Question = () => {
   const { getSessionData } = auth();
   const historyHook = useNavigate();
@@ -37,6 +37,7 @@ const Question = () => {
     <div>
       <BLNavbar />
       {data && <SpamTemplate spamData={data} similarSpams={[]}/>}
+      {!data && <FamousSpams/>}
       <Footer/>
     </div>
   );

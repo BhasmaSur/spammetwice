@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Typography,
@@ -28,7 +28,7 @@ const UserProfile = () => {
   const [editProfile, setEditProfile] = useState(false);
   const { spams, tags, activity, userHighligts } = profile_data;
   const [userProfileData, setUserProfileData] = useState();
-  
+  const [ metaData, setMetaData] = useState({});
   const fetchUserProfile = async ()=>{
     const res = await httpService('get-profile','get',null,"profile")
     return res.data
@@ -55,7 +55,7 @@ const UserProfile = () => {
           Recent Spams
         </Typography>
         <Divider />
-        {spams.map((spam) => {
+        {metaData?.spamEntityList?.map((spam) => {
           return (
             <>
               <Typography
@@ -142,7 +142,7 @@ const UserProfile = () => {
         </Typography>
         <Divider />
         <Typography mt={2} mb={2} align="left">
-          {tags.map((tag) => {
+          {metaData?.tags.map((tag) => {
             return <Chip label={tag} />;
           })}
         </Typography>
@@ -153,6 +153,20 @@ const UserProfile = () => {
   const ShowRecentActivity = () => {
     return <div>activity under construction</div>;
   };
+
+ 
+
+  const fetchDataRelatedToUser = () =>{
+    httpService("meta-data/" + user.email , "get", null, "spam").then((src)=>{
+      if(src){
+        console.log("metadata", src)
+        setMetaData(src.data.result)
+      }
+    })
+  }
+  useEffect(()=>{
+    fetchDataRelatedToUser()
+  },[])
   return (
     <Grid mt={3} container>
       <Grid item sm={2} xs={0}></Grid>
@@ -191,14 +205,14 @@ const UserProfile = () => {
             <EditUserProfile open = {editProfile} handleClose={setEditProfile} profileDetails={data?.result}/>
           </Stack>
         </Box>
-        { "work" && <><Box sx={{ width: "100%" }} mt={7} mb={1}>
+        <Box sx={{ width: "100%"}} mt={7} mb={1}>
           <Stack direction="row">
             <Link
               href="#"
               underline="hover"
               onClick={() => setTabSelected("spams")}
             >
-              {spams.length} Spams
+              {metaData?.spamEntityList?.length} Spams
             </Link>
             <Link
               ml={2}
@@ -206,22 +220,23 @@ const UserProfile = () => {
               underline="hover"
               onClick={() => setTabSelected("tags")}
             >
-              3 Tags
+              {metaData?.tags?.length} Tags
             </Link>
-            <Link
+            {/* <Link
               ml={2}
               href="#"
               underline="hover"
               onClick={() => setTabSelected("activity")}
             >
-              15 Activity
-            </Link>
+               Activity
+            </Link> */}
           </Stack>
         </Box>
         <Divider />
-        <Box sx={{ width: "100%" }} mt={2} mb={2}>
+        {!metaData && <Box sx={{ height: "220px"}}></Box>}
+        {metaData && <Box sx={{ width: "100%", minHeight: "200px" }} mt={2} mb={2}>
           {getTabDataSelected()}
-        </Box></>}
+        </Box>}
       </Grid>
       <Grid m={2} item sm={3} xs={11}>
         <Typography
