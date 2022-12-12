@@ -39,7 +39,6 @@ const EditUserProfile = ({ open, handleClose, profileDetails }) => {
   };
 
   const fileChanged = (event) => {
-    console.log(event);
     setFileSelected(event.target.files[0]);
   };
 

@@ -6,8 +6,10 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import CopyrightIcon from "@mui/icons-material/Copyright";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Footer = () => {
+  const historyHook = useNavigate();
   return (
     <Grid
       bottom={0}
@@ -16,7 +18,7 @@ const Footer = () => {
       justifyContent="center"
       direction="column"
       sx={{
-        position: "relative",
+        position: "absolute",
         left: 0,
         bottom: 0,
         paddingBottom: 3,
@@ -32,17 +34,17 @@ const Footer = () => {
 
       <Grid item sx={{ paddingBottom: 1 }}>
         <Grid container justifyContent="center" columnSpacing={2} rowSpacing={1}>
-          <Grid item xs={6} sm={3} md={1}>
-            First Link
+          <Grid item xs={6} sm={3} md={1} onClick={()=>historyHook("/")}>
+            Home
           </Grid>
-          <Grid item xs={6} sm={3} md={1}>
-            Second Link
+          <Grid item xs={6} sm={3} md={1} onClick={()=>historyHook("/services")}>
+            Our Product & Services
           </Grid>
-          <Grid item xs={6} sm={3} md={1}>
-            Third Link
+          <Grid item xs={6} sm={3} md={1} onClick={()=>historyHook("/reported-sites")}>
+            Reported Sites
           </Grid>
-          <Grid item xs={6} sm={3} md={1}>
-            Fourth Link
+          <Grid item xs={6} sm={3} md={1} onClick={()=>historyHook("/our-team")}>
+            Our Team
           </Grid>
         </Grid>
       </Grid>

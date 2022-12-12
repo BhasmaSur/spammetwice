@@ -37,7 +37,6 @@ const UserProfile = () => {
   if(data?.status !== 200){
     //show error message
   }
-  console.log("profile", data)
   const [tabSelected, setTabSelected] = useState("spams");
   const getTabDataSelected = () => {
     if (tabSelected === PROFILE_TABS.SPAMS) {

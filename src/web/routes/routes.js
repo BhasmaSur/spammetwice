@@ -23,6 +23,9 @@ import ReportedSitesList from "../views/reported-sites";
 import UserProfile from "../views/user-profile";
 import LinksPage from "../views/links-page";
 import OurTeam from "../views/our-team";
+import ProductServices from "../views/product-services";
+import { FreeLayout } from "../hoc";
+import EditAdPage from "../views/edit-ad-page";
 
 const GuardedRoutesBehindFeatureFlag = () => {
   const flags = {
@@ -33,10 +36,8 @@ const GuardedRoutesBehindFeatureFlag = () => {
     <Layout flags={flags}>
       <Routes>
         <Route path="/admin-page" element={<Test />} exact />
-        <Route path="/our-team" element={<OurTeam />} exact />
         <Route path="/spam-page" element={<LandingPage />} exact />
         <Route path="/add-spam" element={<AddSpam />} exact />
-        <Route path="/reported-sites" element={<ReportedSitesList />} exact />
         <Route path="/user-profile" element={<UserProfile />} exact />
         <Route path="*" element={<NotFound />} exact />
       </Routes>
@@ -99,18 +100,22 @@ const GuardedRoutes = () => {
 const AllRoute = () => {
   return (
     <Router>
+      <FreeLayout>
       <Routes>
         <Route path="/spam" element={<Question />} exact />
         <Route path="/links" element={<LinksPage />} exact />
-        {/* <Route path="/our-team" element={<OurTeam />} exact /> */}
+        <Route path="/services" element={<ProductServices />} exact />
+        <Route path="/reported-sites" element={<ReportedSitesList />} exact />
+        <Route path="/our-team" element={<OurTeam />} exact />
         <Route path="/home" element={<Home />} exact />
         <Route path="/login" element={<Login />} exact />
         <Route path="/signup" element={<SignUp />} exact />
-        <Route path="/test" element={<ReportedSitesList />} exact />
+        <Route path="/test" element={<EditAdPage />} exact />
         <Route path="/circular-progress" element={<LoadingScreen />} exact />
         <Route path="/" element={<Home />} exact/>
         <Route path="/*" element={<GuardedRoutes />} />
       </Routes>
+      </FreeLayout>
     </Router>
   );
 };

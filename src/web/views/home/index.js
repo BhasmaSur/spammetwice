@@ -15,21 +15,8 @@ import HomeImage from "../../../common/components/home-image";
 import Footer from "../../hoc/layout/footer";
 import { FreeLayout } from "../../hoc";
 function Home() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const { getSessionData } = auth();
-  const historyHook = useNavigate();
-  const { user } = getSessionData();
-  useEffect(() => {
-    if (Object.entries(user).length !== 0) {
-      console.log(user);
-      setIsLoggedIn(true);
-    }
-  }, []);
   return (
-    <FreeLayout>
       <div>
-        {isLoggedIn && <PrimarySearchAppBar />}
-        {!isLoggedIn && <BLNavbar />}
         {/* <Grid container>
         <Grid style={{ display: "flex", justifyContent: "flex-end" }} item sm={5} xs={11}>
           right
@@ -71,7 +58,6 @@ function Home() {
           </Box>
         </div>
       </div>
-    </FreeLayout>
   );
 }
 

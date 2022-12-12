@@ -6,7 +6,6 @@ const Header = () => {
   return (
     <div>
       <PrimarySearchAppBar />
-      {/* <BLNavbar/> */}
     </div>
   );
 };
