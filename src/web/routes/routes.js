@@ -26,6 +26,7 @@ import OurTeam from "../views/our-team";
 import ProductServices from "../views/product-services";
 import { FreeLayout } from "../hoc";
 import EditAdPage from "../views/edit-ad-page";
+import NavbarLayout from "../../common/components/navbar-layout";
 
 const GuardedRoutesBehindFeatureFlag = () => {
   const flags = {
@@ -33,7 +34,6 @@ const GuardedRoutesBehindFeatureFlag = () => {
     showFooter : true
   }
   return (
-    <Layout flags={flags}>
       <Routes>
         <Route path="/admin-page" element={<Test />} exact />
         <Route path="/spam-page" element={<LandingPage />} exact />
@@ -41,7 +41,6 @@ const GuardedRoutesBehindFeatureFlag = () => {
         <Route path="/user-profile" element={<UserProfile />} exact />
         <Route path="*" element={<NotFound />} exact />
       </Routes>
-    </Layout>
   );
 };
 
@@ -110,7 +109,8 @@ const AllRoute = () => {
         <Route path="/home" element={<Home />} exact />
         <Route path="/login" element={<Login />} exact />
         <Route path="/signup" element={<SignUp />} exact />
-        <Route path="/test" element={<EditAdPage />} exact />
+        {/* <Route path="/test" element={<EditAdPage />} exact /> */}
+        <Route path="/test" element={<NavbarLayout />} exact />
         <Route path="/circular-progress" element={<LoadingScreen />} exact />
         <Route path="/" element={<Home />} exact/>
         <Route path="/*" element={<GuardedRoutes />} />

@@ -21,14 +21,21 @@ import {
 import { auth } from "../../../auth";
 import { httpService } from "../../../common/service-utils";
 import EditUserProfile from "../edit-user-profile";
+import "./index.css"
+import EditAdModal from "../../../common/components/edit-ad-modal";
+import { useNavigate } from "react-router-dom";
 
 const UserProfile = () => {
+  const historyHook = useNavigate();
   const { getSessionData } = auth();
   const { user } = getSessionData();
   const [editProfile, setEditProfile] = useState(false);
   const { spams, tags, activity, userHighligts } = profile_data;
   const [userProfileData, setUserProfileData] = useState();
   const [ metaData, setMetaData] = useState({});
+  const [editAd, setEditAd] = useState(false)
+  const [spamSelected, setSpamSelected] = useState();
+  
   const fetchUserProfile = async ()=>{
     const res = await httpService('get-profile','get',null,"profile")
     return res.data
@@ -37,6 +44,7 @@ const UserProfile = () => {
   if(data?.status !== 200){
     //show error message
   }
+
   const [tabSelected, setTabSelected] = useState("spams");
   const getTabDataSelected = () => {
     if (tabSelected === PROFILE_TABS.SPAMS) {
@@ -46,17 +54,24 @@ const UserProfile = () => {
     } else if (tabSelected === PROFILE_TABS.ACTIVITY)
       return ShowRecentActivity();
   };
+  // const useAddedSpamSelected = (spam) =>{
+  //   historyHook("/spam", { state: { spamId: spam.spamId } });
+  // }
 
   const ShowRecentSpams = () => {
+    const handleAdEdit = (spam)=>{
+      setSpamSelected(spam)
+      setEditAd(true)
+    }
     return (
       <>
         <Typography align="left" mb={2} variant="subtitle2">
-          Recent Spams
+          User Added Spams
         </Typography>
         <Divider />
         {metaData?.spamEntityList?.map((spam) => {
           return (
-            <>
+            <div onClick={() => historyHook("/spam", { state: { spamId: spam.spamId } })}>
               <Typography
                 style={{ fontWeight: 600 }}
                 align="left"
@@ -74,7 +89,7 @@ const UserProfile = () => {
                   variant="subtitle2"
                   component="div"
                 >
-                  {spam.upvotes} Votes
+                  {spam.likes} Likes
                 </Typography>
                 <Typography
                   align="left"
@@ -83,9 +98,9 @@ const UserProfile = () => {
                   variant="subtitle2"
                   component="div"
                 >
-                  {spam.comments} Comments
+                  {spam.views} Views
                 </Typography>
-                <Typography
+                {/* <Typography
                   align="left"
                   ml={2}
                   mb={2}
@@ -93,10 +108,20 @@ const UserProfile = () => {
                   component="div"
                 >
                   {spam.createdOn}
+                </Typography> */}
+                <Typography
+                  align="left"
+                  ml={2}
+                  mb={2}
+                  variant="subtitle2"
+                  component="div"
+                  onClick={()=>handleAdEdit(spam)}
+                >
+                  <spam className="edit-ad">Edit Ad</spam>
                 </Typography>
               </Stack>
               <Divider />
-            </>
+            </div>
           );
         })}
       </>
@@ -156,7 +181,7 @@ const UserProfile = () => {
  
 
   const fetchDataRelatedToUser = () =>{
-    httpService("meta-data/" + user.email , "get", null, "spam").then((src)=>{
+    httpService("meta-data" , "get", null, "spam").then((src)=>{
       if(src){
         console.log("metadata", src)
         setMetaData(src.data.result)
@@ -250,6 +275,7 @@ const UserProfile = () => {
         {ShowCredentials()}
       </Grid>
       <Grid item sm={2} xs={0}></Grid>
+      {editAd && <EditAdModal open={editAd} handleEditAdClose={setEditAd} spam={spamSelected}/>}
     </Grid>
   );
 };

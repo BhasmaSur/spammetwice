@@ -12,13 +12,15 @@ const Question = () => {
   const historyHook = useNavigate();
   const location = useLocation();
   const [data,setData] = useState(null)
+  const [metaData,setMetaData] = useState(null)
   const spamId = location.state?.spamId;
   const { user } = getSessionData();
 
   const fetchSpam = async ()=>{
     console.log("spamId : ", spamId)
     const res = await httpService('search?spamId=' + spamId,'get',null,"spam")
-    setData(res.data.result);
+    setData(res.data.result?.spamEntity);
+    setMetaData({likes: res.data.result?.likesCount, views: res.data.result?.viewsCount})
   }
   useEffect(() => {
     if (Object.entries(user).length !== 0) {
@@ -35,10 +37,8 @@ const Question = () => {
   },[spamId])
   return (
     <div>
-      <BLNavbar />
-      {data && <SpamTemplate spamData={data} similarSpams={[]}/>}
+      {data && <SpamTemplate metaData={metaData} spamData={data} similarSpams={[]}/>}
       {!data && <FamousSpams/>}
-      <Footer/>
     </div>
   );
 };

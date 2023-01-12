@@ -1,29 +1,14 @@
 import React,{useState,useEffect} from 'react'
 import Footer from '../layout/footer'
-import {
-  Grid,
-  PrimarySearchAppBar,
-  Paper,
-  Box,
-  Typography,
-  Button,
-  Stats,
-} from "../../../common";
 import "./index.css"
 import { auth } from "../../../auth";
 import { BLNavbar } from "../../../common/components/navbar-before-login";
+import NavbarLayout from '../../../common/components/navbar-layout';
 const FreeLayout = ({children}) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const { getSessionData } = auth();
-  const { user } = getSessionData();
-  useEffect(() => {
-    if (Object.entries(user).length !== 0) {
-      setIsLoggedIn(true);
-    }
-  }, []);
+  console.log("children :", children)
     return (
       <div>
-          { <BLNavbar />}
+          { <NavbarLayout />}
           <div className="body-box" >
           {children}
           </div>

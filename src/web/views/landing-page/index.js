@@ -6,12 +6,14 @@ import {useLocation} from 'react-router-dom';
 export const LandingPage = () => {
 
   const [data,setData] = useState(null)
+  const [metaData,setMetaData] = useState(null)
   const location = useLocation();
   const spamId = location.state?.spamId;
   const fetchSpam = async ()=>{
-    console.log("spamId : ", spamId)
     const res = await httpService('search?spamId=' + spamId,'get',null,"spam")
-    setData(res.data.result);
+    console.log("spamData : ", res.data.result)
+    setData(res.data.result?.spamEntity);
+    setMetaData({likes: res.data.result?.likesCount, views: res.data.result?.viewsCount})
   }
   useEffect(()=>{
     if(spamId){
@@ -21,7 +23,7 @@ export const LandingPage = () => {
   },[spamId])
   return (
      <div>
-       {data && <SpamTemplate spamData={data} similarSpams={[]}/>}
+       {data && <SpamTemplate metaData={metaData} spamData={data} similarSpams={[]}/>}
     </div>
   )
 }

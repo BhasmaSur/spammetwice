@@ -4,7 +4,7 @@ import { SecondAd } from "../ads";
 import { DESCRIPTION_TYPE } from "../../utils/constants";
 import SpamMetaData from "../spam-metadata";
 
-export default function SpamTemplate({ spamData,similarSpams }) {
+export default function SpamTemplate({ spamData,similarSpams, metaData }) {
   // const { title, descriptionEntityList, resolution, similarSpams } = props;
 console.log("spamData : ", spamData)
 console.log("similarSpams : ", similarSpams)
@@ -48,7 +48,7 @@ console.log("similarSpams : ", similarSpams)
       <Grid m={2} item sm={5} xs={11}>
         <Box sx={{ width: "100%" }}>
           <Typography align="left" variant="h1">{spamData.title}</Typography>
-          <SpamMetaData/>
+          <SpamMetaData metaData={metaData}/>
           {spamData.descriptionEntityList.map((desc) => getTheDescription(desc))}
           {/* <Box mt={3}>
             <Typography align="left" variant="h1">
@@ -79,7 +79,7 @@ console.log("similarSpams : ", similarSpams)
         <Box sx={{ width: "100%" }}
         mt={3}
         >
-          <SecondAd/>
+          <SecondAd adUrl={spamData.userAd}/>
         </Box>
       </Grid>
       <Grid item sm={2} xs={0}></Grid>

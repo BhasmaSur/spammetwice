@@ -60,7 +60,17 @@ const BLNavbar = () => {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <Box sx={{ flexGrow: 1 }} />
+        <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="open drawer"
+            aria-controls={drawerId}
+            onClick={() => setMobileDrawerEl(!mobileDrawerEl)}
+            sx={{ mr: 2, display: { xs: "flex", md: "none" } }}
+          >
+            <MenuIcon />
+          </IconButton>
           <Box>
             <Typography variant="h5" mr={1}  mt={1}  noWrap component="div">
               Spam Me Twice!

@@ -18,7 +18,7 @@ const Footer = () => {
       justifyContent="center"
       direction="column"
       sx={{
-        position: "absolute",
+        position: "relative",
         left: 0,
         bottom: 0,
         paddingBottom: 3,

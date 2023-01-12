@@ -1,11 +1,10 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Box, Modal, Grid, Typography, Button } from "@mui/material";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { useNavigate } from "react-router-dom";
-
-const EditAdModal = () => {
-    const historyHook = useNavigate();
+import { httpService } from "../../../common/service-utils";
+const EditAdModal = ({ open, handleEditAdClose, spam }) => {
   const [fileSelected, setFileSelected] = useState("assets/pikachu.png");
+  const [preview, setPreview] = useState(spam.userAd)
   const fileInput = useRef();
   const matches = useMediaQuery("(max-width:600px)");
   const style = {
@@ -28,18 +27,42 @@ const EditAdModal = () => {
   };
 
   const fileChanged = (event) => {
-    console.log(event);
+    if (!event.target.files || event.target.files.length === 0) {
+      setFileSelected(undefined)
+      return
+  }
     setFileSelected(event.target.files[0]);
+    setPreview(URL.createObjectURL(event.target.files[0]))
   };
 
-  const handleClose = ()=>{
-    historyHook(-1)
+  const saveNewUserAd = () =>{
+    const formData = new FormData();
+    if(fileSelected){
+      formData.append("myFile", fileSelected, fileSelected.name);
+      formData.append("spamId", spam.spamId);
+      let payload = {
+        spamId : spam.spamId,
+        adImage : formData
+      }
+      console.log(payload);
+      httpService("file/upload-ad","post",formData,"spam").then((res)=>{
+        if(res.status === 200){
+          alert("Ad saved successfully")
+          handleEditAdClose(false)
+        }
+      })
+      
+    }
   }
+  // const handleClose = ()=>{
+  //   historyHook("/user-profile")
+  // }
+
   return (
     <>
       <Modal
-        open={true}
-        onClose={() => handleClose(false)}
+        open={open}
+        onClose={() => handleEditAdClose(false)}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
@@ -53,7 +76,7 @@ const EditAdModal = () => {
             <Grid item xs={12} sm={4}>
               <Typography align="center">
                 <img
-                  src="/assets/ad1.jpeg"
+                  src={spam.userAd}
                   width={matches ? 300 : 400}
                   height={matches ? 300 : 400}
                 />
@@ -74,7 +97,7 @@ const EditAdModal = () => {
             <Grid item xs={12} sm={4}>
               <Typography align="center">
                 <img
-                  src="/assets/ad1.jpeg"
+                  src={preview}
                   width={matches ? 300 : 400}
                   height={matches ? 300 : 400}
                 />
@@ -86,12 +109,18 @@ const EditAdModal = () => {
               <Button variant="contained" onClick={selectFile}>
                 Change Ad image
               </Button>
+              <Button variant="contained" onClick={saveNewUserAd}>
+                Save Ad
+              </Button>
               <input
                 onChange={fileChanged}
                 type="file"
                 style={{ display: "none" }}
                 ref={fileInput}
               />
+            </Typography>
+            <Typography>
+              
             </Typography>
           </Grid>
         </Box>
