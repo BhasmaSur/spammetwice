@@ -38,8 +38,8 @@ const Drawer = ({ setMobileDrawerEl }) => {
             </ListItemText>
           </MenuItem>
           <MenuItem>
-            <ListItemText onClick={() => redirectTo("/product")}>
-              Product
+            <ListItemText onClick={() => redirectTo("/services")}>
+              Product & Services
             </ListItemText>
           </MenuItem>
           <MenuItem>

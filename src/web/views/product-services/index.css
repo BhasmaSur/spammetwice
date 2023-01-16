@@ -1,0 +1,9 @@
+.prod-box {
+    border: 1px grey;
+    width: 100%;
+    height: auto;
+}
+
+.img-box {
+    overflow: hidden;
+}

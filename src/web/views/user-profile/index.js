@@ -71,7 +71,7 @@ const UserProfile = () => {
         <Divider />
         {metaData?.spamEntityList?.map((spam) => {
           return (
-            <div onClick={() => historyHook("/spam", { state: { spamId: spam.spamId } })}>
+            <>
               <Typography
                 style={{ fontWeight: 600 }}
                 align="left"
@@ -119,9 +119,19 @@ const UserProfile = () => {
                 >
                   <spam className="edit-ad">Edit Ad</spam>
                 </Typography>
+                <Typography
+                  align="left"
+                  ml={2}
+                  mb={2}
+                  variant="subtitle2"
+                  component="div"
+                  onClick={() => historyHook("/spam", { state: { spamId: spam.spamId } })}
+                >
+                  <spam className="edit-ad">Go To Spam</spam>
+                </Typography>
               </Stack>
               <Divider />
-            </div>
+            </>
           );
         })}
       </>

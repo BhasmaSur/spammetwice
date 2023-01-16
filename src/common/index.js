@@ -75,7 +75,9 @@ import useWindowDimensions from "./utils/hooks/useWindowsDimensions";
 import { data,profile_data } from "./demo-data";
 import fakeHttpRequests from "./utils/stub/fake-https";
 import { PROFILE_TABS } from "./utils/constants";
+import ShowCurlModal from "./components/show-curl-modal";
 export {
+  ShowCurlModal,
   PhishingRoundedIcon,
   PhishingIcon,
   LinkIcon,

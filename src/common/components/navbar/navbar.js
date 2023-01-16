@@ -71,6 +71,10 @@ export default function PrimarySearchAppBar() {
     console.log("menu")
     setReturnedValues((preV) => [...preV, event.target.value]);
   };
+
+  const redirectToProductAndServices = () =>{
+    historyHook("/services");
+  }
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -117,7 +121,7 @@ export default function PrimarySearchAppBar() {
                 aria-label="account of current user"
                 aria-controls={menuId}
                 aria-haspopup="true"
-                onClick={redirectToHome}
+                onClick={redirectToProductAndServices}
                 color="inherit"
               >
                 <PrecisionManufacturingIcon />
