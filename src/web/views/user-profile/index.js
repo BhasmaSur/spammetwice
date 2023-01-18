@@ -21,7 +21,7 @@ import {
 import { auth } from "../../../auth";
 import { httpService } from "../../../common/service-utils";
 import EditUserProfile from "../edit-user-profile";
-import "./index.css"
+import "./index.css";
 import EditAdModal from "../../../common/components/edit-ad-modal";
 import { useNavigate } from "react-router-dom";
 
@@ -32,16 +32,16 @@ const UserProfile = () => {
   const [editProfile, setEditProfile] = useState(false);
   const { spams, tags, activity, userHighligts } = profile_data;
   const [userProfileData, setUserProfileData] = useState();
-  const [ metaData, setMetaData] = useState({});
-  const [editAd, setEditAd] = useState(false)
+  const [metaData, setMetaData] = useState({});
+  const [editAd, setEditAd] = useState(false);
   const [spamSelected, setSpamSelected] = useState();
-  
-  const fetchUserProfile = async ()=>{
-    const res = await httpService('get-profile','get',null,"profile")
-    return res.data
-  }
-  const {data} = useQuery("profileData", fetchUserProfile);
-  if(data?.status !== 200){
+
+  const fetchUserProfile = async () => {
+    const res = await httpService("get-profile", "get", null, "profile");
+    return res.data;
+  };
+  const { data } = useQuery("profileData", fetchUserProfile);
+  if (data?.status !== 200) {
     //show error message
   }
 
@@ -51,6 +51,8 @@ const UserProfile = () => {
       return ShowRecentSpams();
     } else if (tabSelected === PROFILE_TABS.TAGS) {
       return ShowTagsCreated();
+    } else if (tabSelected === PROFILE_TABS.URLS) {
+      return ShowUrlsAddedByUser();
     } else if (tabSelected === PROFILE_TABS.ACTIVITY)
       return ShowRecentActivity();
   };
@@ -59,10 +61,10 @@ const UserProfile = () => {
   // }
 
   const ShowRecentSpams = () => {
-    const handleAdEdit = (spam)=>{
-      setSpamSelected(spam)
-      setEditAd(true)
-    }
+    const handleAdEdit = (spam) => {
+      setSpamSelected(spam);
+      setEditAd(true);
+    };
     return (
       <>
         <Typography align="left" mb={2} variant="subtitle2">
@@ -115,7 +117,7 @@ const UserProfile = () => {
                   mb={2}
                   variant="subtitle2"
                   component="div"
-                  onClick={()=>handleAdEdit(spam)}
+                  onClick={() => handleAdEdit(spam)}
                 >
                   <spam className="edit-ad">Edit Ad</spam>
                 </Typography>
@@ -125,7 +127,9 @@ const UserProfile = () => {
                   mb={2}
                   variant="subtitle2"
                   component="div"
-                  onClick={() => historyHook("/spam", { state: { spamId: spam.spamId } })}
+                  onClick={() =>
+                    historyHook("/spam", { state: { spamId: spam.spamId } })
+                  }
                 >
                   <spam className="edit-ad">Go To Spam</spam>
                 </Typography>
@@ -151,7 +155,7 @@ const UserProfile = () => {
         </Stack>
         <Stack direction="row">
           <IconButton mt={2}>
-            < SchoolIcon/>
+            <SchoolIcon />
           </IconButton>
           <Typography mt={1} align="left" variant="subtitle1">
             {data?.result.education || "Enter about your education"}
@@ -184,23 +188,59 @@ const UserProfile = () => {
       </>
     );
   };
+
+  const ShowUrlsAddedByUser = () => {
+    return (
+      <>
+        <Typography align="left" mb={2} variant="subtitle2">
+          User Added Spams
+        </Typography>
+        <Divider />
+        {metaData?.reportedSitesResponses?.map((url) => {
+          return (
+            <>
+              <Typography
+                style={{ fontWeight: 600 }}
+                align="left"
+                mt={2}
+                mb={1}
+                variant="subtitle2"
+                component="div"
+              >
+                {url.baseUrl}
+              </Typography>
+              <Stack direction="row">
+                <Typography
+                  align="left"
+                  mb={2}
+                  variant="subtitle2"
+                  component="div"
+                >
+                  {url.occurance} Occurances
+                </Typography>
+              </Stack>
+              <Divider />
+            </>
+          );
+        })}
+      </>
+    );
+  };
   const ShowRecentActivity = () => {
     return <div>activity under construction</div>;
   };
 
- 
-
-  const fetchDataRelatedToUser = () =>{
-    httpService("meta-data" , "get", null, "spam").then((src)=>{
-      if(src){
-        console.log("metadata", src)
-        setMetaData(src.data.result)
+  const fetchDataRelatedToUser = () => {
+    httpService("meta-data", "get", null, "spam").then((src) => {
+      if (src) {
+        setMetaData(src.data.result);
       }
-    })
-  }
-  useEffect(()=>{
-    fetchDataRelatedToUser()
-  },[])
+    });
+  };
+
+  useEffect(() => {
+    fetchDataRelatedToUser();
+  }, []);
   return (
     <Grid mt={3} container>
       <Grid item sm={2} xs={0}></Grid>
@@ -213,7 +253,9 @@ const UserProfile = () => {
               sx={{ width: 120, height: 120 }}
             />
             <Stack direction="column">
-              <Typography variant="h45">{data?.result.username || user.userName}</Typography>
+              <Typography variant="h45">
+                {data?.result.username || user.userName}
+              </Typography>
               <Typography align="left" variant="subtitle1">
                 {data?.result.bio || "About You"}
               </Typography>
@@ -233,44 +275,55 @@ const UserProfile = () => {
             <Typography align="left" variant="subtitle2">
               {data?.result.about || "favourite quote"}
             </Typography>
-            <Typography onClick={()=>setEditProfile(!editProfile)} color="text.disabled" align="left" variant="subtitle1">
+            <Typography
+              onClick={() => setEditProfile(!editProfile)}
+              color="text.disabled"
+              align="left"
+              variant="subtitle1"
+            >
               Edit Profile
             </Typography>
-            <EditUserProfile open = {editProfile} handleClose={setEditProfile} profileDetails={data?.result}/>
+            <EditUserProfile
+              open={editProfile}
+              handleClose={setEditProfile}
+              profileDetails={data?.result}
+            />
           </Stack>
         </Box>
-        <Box sx={{ width: "100%"}} mt={7} mb={1}>
+        <Box sx={{ width: "100%" }} mt={7} mb={1}>
           <Stack direction="row">
             <Link
               href="#"
               underline="hover"
-              onClick={() => setTabSelected("spams")}
+              onClick={() => setTabSelected(PROFILE_TABS.SPAMS)}
             >
               {metaData?.spamEntityList?.length} Spams
-            </Link>
-            <Link
-              ml={2}
-              href="#"
-              underline="hover"
-              onClick={() => setTabSelected("tags")}
-            >
-              {metaData?.tags?.length} Tags
             </Link>
             {/* <Link
               ml={2}
               href="#"
               underline="hover"
-              onClick={() => setTabSelected("activity")}
+              onClick={() => setTabSelected(PROFILE_TABS.TAGS)}
             >
-               Activity
+              {metaData?.tags?.length} Tags
             </Link> */}
+            <Link
+              ml={2}
+              href="#"
+              underline="hover"
+              onClick={() => setTabSelected(PROFILE_TABS.URLS)}
+            >
+              {metaData?.reportedSitesResponses?.length} URLs Added
+            </Link>
           </Stack>
         </Box>
         <Divider />
-        {!metaData && <Box sx={{ height: "220px"}}></Box>}
-        {metaData && <Box sx={{ width: "100%", minHeight: "200px" }} mt={2} mb={2}>
-          {getTabDataSelected()}
-        </Box>}
+        {!metaData && <Box sx={{ height: "220px" }}></Box>}
+        {metaData && (
+          <Box sx={{ width: "100%", minHeight: "200px" }} mt={2} mb={2}>
+            {getTabDataSelected()}
+          </Box>
+        )}
       </Grid>
       <Grid m={2} item sm={3} xs={11}>
         <Typography
@@ -285,7 +338,13 @@ const UserProfile = () => {
         {ShowCredentials()}
       </Grid>
       <Grid item sm={2} xs={0}></Grid>
-      {editAd && <EditAdModal open={editAd} handleEditAdClose={setEditAd} spam={spamSelected}/>}
+      {editAd && (
+        <EditAdModal
+          open={editAd}
+          handleEditAdClose={setEditAd}
+          spam={spamSelected}
+        />
+      )}
     </Grid>
   );
 };

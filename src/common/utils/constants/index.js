@@ -1,6 +1,7 @@
 const PROFILE_TABS = {
     SPAMS : "spams",
     TAGS : "tags",
+    URLS : "urls",
     ACTIVITY : "activity"
 }
 
