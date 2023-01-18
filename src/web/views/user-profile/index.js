@@ -196,30 +196,38 @@ const UserProfile = () => {
           User Added Spams
         </Typography>
         <Divider />
-        {metaData?.reportedSitesResponses?.map((url) => {
+        {metaData?.spamEntityList?.map((spam) => {
           return (
             <>
-              <Typography
-                style={{ fontWeight: 600 }}
-                align="left"
-                mt={2}
-                mb={1}
-                variant="subtitle2"
-                component="div"
-              >
-                {url.baseUrl}
-              </Typography>
-              <Stack direction="row">
-                <Typography
-                  align="left"
-                  mb={2}
-                  variant="subtitle2"
-                  component="div"
-                >
-                  {url.occurance} Occurances
-                </Typography>
-              </Stack>
-              <Divider />
+              {spam.urls.length > 0 && (
+                <>
+                  <Typography
+                    style={{ fontWeight: 600 }}
+                    align="left"
+                    mt={2}
+                    mb={1}
+                    variant="subtitle2"
+                    component="div"
+                  >
+                    {spam.spamId}
+                  </Typography>
+                  <Stack direction="col">
+                    {spam.urls.map((url) => {
+                      return (
+                        <Typography
+                          align="left"
+                          mb={2}
+                          variant="subtitle2"
+                          component="div"
+                        >
+                          {url}
+                        </Typography>
+                      );
+                    })}
+                  </Stack>
+                  <Divider />
+                </>
+              )}
             </>
           );
         })}
