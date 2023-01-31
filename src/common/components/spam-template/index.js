@@ -1,14 +1,33 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Box, Typography, uuidv4, Link, FirstAd,Grid } from "../..";
 import { SecondAd } from "../ads";
 import { DESCRIPTION_TYPE } from "../../utils/constants";
 import SpamMetaData from "../spam-metadata";
+import { useNavigate } from "react-router-dom";
 
-export default function SpamTemplate({ spamData,similarSpams, metaData }) {
+export default function SpamTemplate({checkForView = false, refreshPage,displayLike,isEditable, spamData,similarSpams, metaData}) {
   // const { title, descriptionEntityList, resolution, similarSpams } = props;
-console.log("spamData : ", spamData)
-console.log("similarSpams : ", similarSpams)
+  const historyHook = useNavigate();
+  const editSpam = () => {
+    historyHook("/edit-spam",{state:{spamToEdit: spamData}})
+  }
   const getTextContent = (content) => {
+    return (
+      <Typography
+        key={uuidv4()}
+        mt={2}
+        style={{
+          wordWrap: "break-word",
+          textAlign: "left",
+        }}
+        variant="subtitle1"
+      >
+        {content}
+      </Typography>
+    );
+  };
+
+  const getUrlContent = (content) => {
     return (
       <Typography
         key={uuidv4()}
@@ -39,8 +58,11 @@ console.log("similarSpams : ", similarSpams)
         return getImageContent(desc.descContent);
       case DESCRIPTION_TYPE.VIDEO :
         return getImageContent(desc.descContent);
+      case DESCRIPTION_TYPE.URL :
+        return getUrlContent(desc.descContent);
     }
   };
+
   // console.log(props)
   return (
     <Grid container>
@@ -48,7 +70,7 @@ console.log("similarSpams : ", similarSpams)
       <Grid m={2} item sm={5} xs={11}>
         <Box sx={{ width: "100%" }}>
           <Typography align="left" variant="h1">{spamData.title}</Typography>
-          <SpamMetaData metaData={metaData}/>
+          <SpamMetaData checkForView={checkForView} refreshPage={refreshPage} displayLike={displayLike} editSpam={spamData} isEditable={isEditable} metaData={metaData}/>
           {spamData.descriptionEntityList.map((desc) => getTheDescription(desc))}
           {/* <Box mt={3}>
             <Typography align="left" variant="h1">

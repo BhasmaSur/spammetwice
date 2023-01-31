@@ -17,7 +17,6 @@ const Question = () => {
   const { user } = getSessionData();
 
   const fetchSpam = async ()=>{
-    console.log("spamId : ", spamId)
     const res = await httpService('search?spamId=' + spamId,'get',null,"spam")
     setData(res.data.result?.spamEntity);
     setMetaData({likes: res.data.result?.likesCount, views: res.data.result?.viewsCount})
@@ -37,7 +36,7 @@ const Question = () => {
   },[spamId])
   return (
     <div>
-      {data && <SpamTemplate metaData={metaData} spamData={data} similarSpams={[]}/>}
+      {data && <SpamTemplate displayLike={false} metaData={metaData} spamData={data} similarSpams={[]}/>}
       {!data && <FamousSpams/>}
     </div>
   );
