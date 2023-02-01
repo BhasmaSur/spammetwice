@@ -15,6 +15,7 @@ import "./idplogin.css";
 import { useNavigate } from 'react-router-dom';
 
 import CopyrightIcon from "@mui/icons-material/Copyright";
+import { signUpValidations, userNameValidation } from '../../../common/validations';
 
 const SignUp = () => {
   const [userName, setUserName] = useState("");
@@ -23,8 +24,9 @@ const SignUp = () => {
   const historyHook = useNavigate();
 
   const verifyUser = () => {
-    if ((password === confirmPassword) && userName) {
-      let signUpData = {
+    const {valid, message} = signUpValidations(userName, password, confirmPassword);
+    if(valid){
+        let signUpData = {
         username: userName,
         password: password
       }
@@ -38,6 +40,8 @@ const SignUp = () => {
           }
         }
       })
+    }else{
+      alert(message)
     }
   }
   return (
