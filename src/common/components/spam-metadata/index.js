@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { httpService } from "../../../common/service-utils";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
+import RecommendTwoToneIcon from '@mui/icons-material/RecommendTwoTone';
 // const metaData = {
 //     likes : 20,
 //     views : 100,
@@ -75,15 +76,14 @@ const SpamMetaData = ({checkForView, refreshPage, displayLike, editSpam, metaDat
       </Typography>
       {displayLike && (
         <Typography align="left" variant="subtitle2">
-          {!alreadyLiked && <ThumbUpIcon
+          {!alreadyLiked && <RecommendTwoToneIcon
           onClick={likeSpam}
-            color={"primary"}
-            fontSize={"20"}
+            fontSize={"medium"}
           />}
-          {alreadyLiked && <ThumbDownIcon 
+          {alreadyLiked && <RecommendTwoToneIcon 
           onClick={dislikeSpam}
           color={"primary"}
-          fontSize={"20"}
+          fontSize={"medium"}
           />}
         </Typography>
       )}

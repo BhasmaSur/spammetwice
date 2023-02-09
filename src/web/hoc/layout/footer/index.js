@@ -5,7 +5,6 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import CopyrightIcon from "@mui/icons-material/Copyright";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 const Footer = () => {
@@ -23,7 +22,7 @@ const Footer = () => {
         bottom: 0,
         paddingBottom: 3,
         right: 0,
-        backgroundColor: "#889900",
+        backgroundColor: "#9C8BEF",
       }}
     >
       <Container sx={{ padding: 3 }}>

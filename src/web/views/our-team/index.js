@@ -15,12 +15,9 @@ function OurTeam() {
       rowSpacing={1}
       justifyContent="center"
       direction="column"
-      sx={{
-        backgroundColor: "#889900",
-      }}
     >
       <Container sx={{ padding: 3 }}>
-        <Typography variant="h4" sx={{ font: "bold", color: "white" }}>
+        <Typography variant="h4" sx={{marginTop: "20px", marginBottom: "20px", font: "bold" }}>
           Our Amazing Team
         </Typography>
       </Container>
@@ -57,10 +54,7 @@ function OurTeam() {
                   elevation={10}
                   sx={{
                     height: 460,
-                    width: 270,
-                    p: 0,
-                    marginLeft: "auto",
-                    marginRight: "auto",
+                    width: "90%",
                     borderRadius: "20px",
                   }}
                 >
@@ -76,7 +70,7 @@ function OurTeam() {
                           marginRight: "auto",
                           height: 200,
                           width: 200,
-                          border: "7px solid #889900",
+                          border: "1px solid #BDCDD6",
                         }}
                       />
                     </Grid>
@@ -127,10 +121,7 @@ function OurTeam() {
                   elevation={10}
                   sx={{
                     height: 460,
-                    width: 270,
-                    p: 0,
-                    marginLeft: "auto",
-                    marginRight: "auto",
+                    width: "90%",
                     borderRadius: "20px",
                   }}
                 >
@@ -146,7 +137,7 @@ function OurTeam() {
                           marginRight: "auto",
                           height: 200,
                           width: 200,
-                          border: "7px solid #889900",
+                          border: "1px solid #BDCDD6",
                         }}
                       />
                     </Grid>
@@ -196,10 +187,7 @@ function OurTeam() {
                   elevation={10}
                   sx={{
                     height: 460,
-                    width: 270,
-                    p: 0,
-                    marginLeft: "auto",
-                    marginRight: "auto",
+                    width: "90%",
                     borderRadius: "20px",
                   }}
                 >
@@ -215,7 +203,7 @@ function OurTeam() {
                           marginRight: "auto",
                           height: 200,
                           width: 200,
-                          border: "7px solid #889900",
+                          border: "1px solid #BDCDD6",
                         }}
                       />
                     </Grid>

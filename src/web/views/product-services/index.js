@@ -1,84 +1,127 @@
 import React, { useState } from "react";
-import { ShowCurlModal } from "../../../common"
-import {
-  Grid,
-  Box,
-  Typography,
-  Button,
-} from "../../../common";
-import "./index.css"
-
+import { Divider, ShowCurlModal } from "../../../common";
+import { Grid, Box, Typography, Button } from "../../../common";
+import "./index.css";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { ourServicesList } from "../../demo-data";
+import { List, ListItem, ListItemText } from "@mui/material";
 function ProductServices() {
-
-    const [openShowCurlModal, setOpenShowCurlModal] = useState(false)
- const showCurl = () =>{
-    setOpenShowCurlModal(true)
- }
+  const matches = useMediaQuery("(max-width:600px)");
+  const headingfontSize = matches ? "40px" : "50px";
+  const textfontSize = matches ? "20px" : "25px";
+  const listFontSize = matches ? "15px" : "20px";
+  const [openShowCurlModal, setOpenShowCurlModal] = useState(false);
+  const showCurl = () => {
+    setOpenShowCurlModal(true);
+  };
 
   return (
     <>
-    <div className="prod-box">
-    <Grid container spacing={0}>
-          <Grid item xs={12} sm={8}>
-              <Typography mb={5} variant="h2">Our Product</Typography>
-              <Typography mb={2} variant="h5" color={"primary"}>
-                API to check if the website you going to interact with is ever reported
-              </Typography>
-              <Typography mb={2} variant="h4">
-                https://spammetwice.com/check/{'<website-name>'}
-              </Typography>
-              <Typography mb={5} variant="subtitle1">
-                e.g. https://spammetwice.com/check/spammetwice
-              </Typography>
-              <Typography mb={10} variant="subtitle1">
-                <Button onClick={showCurl} variant="contained">Download the curl</Button>
-              </Typography>
+      <div className="prod-box">
+        <Grid container spacing={0} sx={{ marginTop: 5 }}>
+          <Grid item xs={0} sm={1} order={{ xs: 1, sm: 1 }}></Grid>
+          <Grid item xs={12} sm={6} order={{ xs: 2, sm: 2 }}>
+            <Typography
+              mt={matches ? 1 : 0}
+              mb={matches ? 2 : 5}
+              variant="h2"
+              fontSize={headingfontSize}
+            >
+              Our Product
+            </Typography>
+            <Typography
+              mb={2}
+              variant="h5"
+              fontSize={textfontSize}
+              color={"primary"}
+            >
+              API to check if the website you going to interact with is ever
+              reported
+            </Typography>
+            <Typography mb={2} variant={matches ? "subtitle1" : "h5"}>
+              https://spammetwice.com/spam/site
+            </Typography>
+            <Typography variant="subtitle1">
+              e.g. https://spammetwice.com/spam/site
+            </Typography>
+            <Typography mb={5} variant="subtitle1">
+              method : Post,
+              payload : {'baseUrl : <websiteName>'}
+            </Typography>
+            <Typography mb={matches ? 5 : 10} variant="subtitle1">
+              <Button onClick={showCurl} variant="contained">
+                Download the curl
+              </Button>
+            </Typography>
           </Grid>
-          <Grid item xs={0} sm={4}>
-            <div className="img-box">
-                <img 
-                    src="/assets/product.jpg"
-                    aspect-ratio= "16/9"
-                    height={"auto"}
-                    width={"100%"}
-                />
-            </div>
-            
+          <Grid item xs={0} sm={1} order={{ xs: 2, sm: 3 }}></Grid>
+          <Grid item xs={0} sm={3} order={{ xs: 1, sm: 4 }} mt={matches ? 0 : 12}>
+            <Typography align="left">
+              <img
+                src="/assets/product.jpg"
+                aspect-ratio="16/9"
+                height={"auto"}
+                width={"100%"}
+              />
+            </Typography>
           </Grid>
+          <Grid item xs={0} sm={1} order={{ xs: 2, sm: 5 }}></Grid>
         </Grid>
-    </div>
-    
-        <Grid container spacing={0}>
-        <Grid item xs={0} sm={4}>
-            <div className="img-box">
-                <img 
-                    src="/assets/service.jpg"
-                    aspect-ratio= "16/9"
-                    height={"auto"}
-                    width={"100%"}
-                />
-            </div>
-            
-          </Grid>
-          <Grid item xs={12} sm={8}>
-            <Box mt={15} justifyContent={"center"}>
-              <Typography align="center" mb={5} variant="h2">Our Service</Typography>
-              <Typography variant="h5" color={"primary"}>
-                You can add your spam and in every spam you can put your own ad, this can help you in monetizing your 
-                spam, more views you have, more money you will make.
-              </Typography>
-              <Typography variant="h5" color={"primary"}>
-                You can also search spams, save your hard earned money and time.
-              </Typography>
-              <Typography mb={10} variant="subtitle1">
-                You can contact us to to provide your ADs to most viewed Spams
-              </Typography>
-            </Box>
-          </Grid>
+      </div>
+      <Divider
+        textAlign="center"
+        sx={{ width: "80%", marginLeft: "auto", marginRight: "auto" }}
+      />
+      <Grid container spacing={0} sx={{ marginTop: 5 }}>
+        <Grid item xs={0} sm={1}></Grid>
+        <Grid item xs={0} sm={3} mt={matches ? 0 : 12}>
+          <Typography align="left">
+            <img
+              src="/assets/service.jpg"
+              aspect-ratio="16/9"
+              height={"auto"}
+              width={"100%"}
+            />
+          </Typography>
         </Grid>
-        {openShowCurlModal && <ShowCurlModal open={openShowCurlModal} closeCurlModal={setOpenShowCurlModal}/>}
+        <Grid item xs={0} sm={1}></Grid>
+        <Grid item xs={12} sm={6}>
+          <Box mt={0} mb={10} justifyContent={"center"}>
+            <Typography
+              align="center"
+              mt={matches ? 1 : 0}
+              mb={matches ? 2 : 5}
+              variant="h2"
+              fontSize={headingfontSize}
+            >
+              Our Services
+            </Typography>
+            <List>
+              {ourServicesList.map((service, index) => {
+                return (
+                  <ListItem>
+                    <Typography
+                      variant="h5"
+                      color={"primary"}
+                      fontSize={listFontSize}
+                    >
+                      {index + 1 + ". " + service}
+                    </Typography>
+                  </ListItem>
+                );
+              })}
+            </List>
+          </Box>
+        </Grid>
+        <Grid item xs={0} sm={1}></Grid>
+      </Grid>
+      {openShowCurlModal && (
+        <ShowCurlModal
+          open={openShowCurlModal}
+          closeCurlModal={setOpenShowCurlModal}
+        />
+      )}
     </>
-    
   );
 }
 

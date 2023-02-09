@@ -58,5 +58,12 @@ const data = {
 
   };
 
+const ourServicesList = [
+    "You can add and check spams, these spam database will help whole world from falling for something similar.",
+    "In every spam you add, you can put your own advertisement, this can help you in monetizing your spam, more views you have, more money you will make.",
+    "Search for websites, if they were ever reported, how these websites trap people.",
+    "You can contact us to to provide your Advertisements to most viewed Spams or most liked spams",
+  ]
 
-  export { data }
+
+  export { data, ourServicesList }

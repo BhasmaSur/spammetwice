@@ -10,18 +10,21 @@ import {
 } from "@mui/material";
 import React, { useRef, useState } from "react";
 import { httpService } from "../../../common/service-utils";
+import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 
 const style = {
   position: "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: "60%",
+  width: "70%",
+  height: "80%",
   bgcolor: "background.paper",
   border: "2px solid green",
   borderRadius: "10px",
   boxShadow: 24,
   p: 4,
+  overflow: "scroll"
 };
 
 const EditUserProfile = ({ open, handleClose, profileDetails }) => {
@@ -87,7 +90,7 @@ const EditUserProfile = ({ open, handleClose, profileDetails }) => {
     }
   };
   return (
-    <>
+    <div>
       <Modal
         open={open}
         onClose={() => handleClose(false)}
@@ -95,6 +98,9 @@ const EditUserProfile = ({ open, handleClose, profileDetails }) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
+        <Typography align="right">
+            <CancelOutlinedIcon onClick={() => handleClose(false)}/>
+          </Typography>
           <Typography align="center" variant="h6" marginBottom={5}>
             Edit Profile
           </Typography>
@@ -221,7 +227,7 @@ const EditUserProfile = ({ open, handleClose, profileDetails }) => {
           <Divider />
         </Box>
       </Modal>
-    </>
+    </div>
   );
 };
 

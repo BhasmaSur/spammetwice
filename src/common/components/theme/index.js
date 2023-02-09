@@ -2,7 +2,7 @@ import { createTheme } from "@mui/material";
 const theme = createTheme();
 
 theme.palette.primary = {
-  main: "#890",
+  main: "#9C8BEF",
 };
 
 theme.palette.secondary = {
@@ -17,4 +17,9 @@ theme.typography.h1 = {
     fontSize: "2rem",
   },
 };
+
+// theme.typography.fontFamily =[
+//   'Dancing Script',
+//   'cursive'
+// ].join(',');
 export default theme;

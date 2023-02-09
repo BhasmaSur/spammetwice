@@ -10,11 +10,14 @@ import {
   Button,
   Stats,
 } from "../../../common";
-import { BLNavbar } from "../../../common/components/navbar-before-login";
 import HomeImage from "../../../common/components/home-image";
-import Footer from "../../hoc/layout/footer";
-import { FreeLayout } from "../../hoc";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import OnePlatform from "../../../common/components/one-platform";
+
 function Home() {
+  const matches = useMediaQuery("(max-width:600px)");
+  const headingText = matches ? "30px" : "40px"
+  const websiteNameText = matches ? "35px" : "50px"
   return (
       <div>
         {/* <Grid container>
@@ -27,9 +30,9 @@ function Home() {
       </Grid> */}
         <Grid container spacing={0} justify="flex-start">
           <Grid item xs={12} sm={6} order={{ xs: 3, sm: 2 }}>
-            <Box mt={15} ml={"10%"} mr={"10%"} justifyContent={"center"}>
-              <Typography variant="h2">Let Nobody</Typography>
-              <Typography variant="h2" color={"primary"}>
+            <Box mt={matches ? 0 : 15} ml={"10%"} mr={"10%"} justifyContent={"center"}>
+              <Typography variant="h2" fontSize={headingText}>Let Nobody</Typography>
+              <Typography variant="h2" fontSize={websiteNameText} color={"primary"}>
                 Spam You Twice!!
               </Typography>
               <Typography variant="subtitle1">
@@ -57,6 +60,7 @@ function Home() {
             <Stats />
           </Box>
         </div>
+        {/* <OnePlatform/> */}
       </div>
   );
 }

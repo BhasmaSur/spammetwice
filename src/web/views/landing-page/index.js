@@ -3,7 +3,7 @@ import SpamTemplate from '../../../common/components/spam-template';
 import { httpService } from "../../../common/service-utils";
 import {useLocation} from 'react-router-dom';
 import { auth } from "../../../auth";
-
+import "./index.css"
 export const LandingPage = () => {
   const { getSessionData } = auth();
   const { user } = getSessionData();

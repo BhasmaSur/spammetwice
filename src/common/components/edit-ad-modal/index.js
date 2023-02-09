@@ -1,7 +1,9 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState } from "react";
 import { Box, Modal, Grid, Typography, Button } from "@mui/material";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { httpService } from "../../../common/service-utils";
+import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
+
 const EditAdModal = ({ open, handleEditAdClose, spam }) => {
   const [fileSelected, setFileSelected] = useState("assets/pikachu.png");
   const [preview, setPreview] = useState(spam.userAd)
@@ -67,8 +69,11 @@ const EditAdModal = ({ open, handleEditAdClose, spam }) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
+          <Typography align="right">
+            <CancelOutlinedIcon onClick={() => handleEditAdClose(false)}/>
+          </Typography>
           <Grid item xs={12}>
-            <Typography align="center" variant="h4" mt={matches ? 0 : 10}>
+            <Typography align="center" variant="h4" mt={matches ? 0 : 0}>
               User Ad
             </Typography>
           </Grid>
