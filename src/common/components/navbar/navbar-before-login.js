@@ -64,6 +64,10 @@ export default function NavbarBeforeLogin() {
   const redirectToOurTeam = () =>{
     historyHook("/our-team")
   }
+
+  const redirectToProdctsAndService = ()=>{
+    historyHook("/services");
+  }
   const hendleReportedList = () => {
     historyHook("/reported-sites");
   };
@@ -122,7 +126,7 @@ export default function NavbarBeforeLogin() {
                 aria-label="account of current user"
                 aria-controls={menuId}
                 aria-haspopup="true"
-                onClick={redirectToHome}
+                onClick={redirectToProdctsAndService}
                 color="inherit"
               >
                 <PrecisionManufacturingIcon />

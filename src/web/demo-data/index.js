@@ -65,5 +65,14 @@ const ourServicesList = [
     "You can contact us to to provide your Advertisements to most viewed Spams or most liked spams",
   ]
 
+const howItWorks = [
+  "Sign up and login",
+  "Click on Add button, it will open Add spam window",
+  "Give a title to your spam, try to add keywords that can help in searching",
+  "Now you can Add text, urls, images to better describe about the spam",
+  "You can choose to change the Advertisement on the spam you created",
+  "Thats it, Your spam is added and visble to everyone around the world",
+]
 
-  export { data, ourServicesList }
+
+  export { data, ourServicesList, howItWorks }

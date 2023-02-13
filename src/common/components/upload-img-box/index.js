@@ -34,7 +34,7 @@ const UploadImageBox = ({handleChange,handleDelete,itemNumber}) => {
         }}
       >
         <input type="file" onChange={(event)=>fileSelectedHandler(event)} />
-        <Button size="small" variant="contained" onClick={uploadFile}>
+        <Button disabled={!fileSelected} size="small" variant="contained" onClick={uploadFile}>
           Upload
         </Button>
       </Grid>

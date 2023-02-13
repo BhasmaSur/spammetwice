@@ -1,10 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import { auth } from "../../../auth";
+import React from "react";
 import {
   Grid,
-  PrimarySearchAppBar,
-  Paper,
   Box,
   Typography,
   Button,
@@ -12,22 +8,19 @@ import {
 } from "../../../common";
 import HomeImage from "../../../common/components/home-image";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import OnePlatform from "../../../common/components/one-platform";
+import { useNavigate } from "react-router-dom";
+import HowItWorks from "../../../common/components/how-it-works";
 
 function Home() {
+  const historyHook = useNavigate();
   const matches = useMediaQuery("(max-width:600px)");
   const headingText = matches ? "30px" : "40px"
   const websiteNameText = matches ? "35px" : "50px"
+  const redirectToProductAndServices = () =>{
+    historyHook("/services");
+  }
   return (
       <div>
-        {/* <Grid container>
-        <Grid style={{ display: "flex", justifyContent: "flex-end" }} item sm={5} xs={11}>
-          right
-        </Grid>
-        <Grid flexDirection={"col-reverse"} item sm={6} xs={11}>
-          left
-        </Grid>
-      </Grid> */}
         <Grid container spacing={0} justify="flex-start">
           <Grid item xs={12} sm={6} order={{ xs: 3, sm: 2 }}>
             <Box mt={matches ? 0 : 15} ml={"10%"} mr={"10%"} justifyContent={"center"}>
@@ -45,7 +38,7 @@ function Home() {
                 So join us in our efforts, it will have multiple benefits, to
                 know more about the benefits, click
               </Typography>
-              <Button variant="contained">How it will benefit you ?</Button>
+              <Button onClick={redirectToProductAndServices} variant="contained">How it will benefit you ?</Button>
             </Box>
           </Grid>
           <Grid item xs={12} sm={6} order={{ xs: 2, sm: 3 }}>
@@ -54,13 +47,13 @@ function Home() {
         </Grid>
         <div>
           <Box mt={10} mb={10}>
-            <Typography variant="h5" mb={5}>
-              Stats
+            <Typography variant="h3" mb={10}>
+              How We Growing..
             </Typography>
             <Stats />
           </Box>
         </div>
-        {/* <OnePlatform/> */}
+        <HowItWorks/>
       </div>
   );
 }
