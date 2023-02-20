@@ -61,19 +61,19 @@ export default function NavbarBeforeLogin() {
     historyHook("/home");
   };
 
-  const redirectToOurTeam = () =>{
-    historyHook("/our-team")
-  }
+  const redirectToOurTeam = () => {
+    historyHook("/our-team");
+  };
 
-  const redirectToProdctsAndService = ()=>{
+  const redirectToProdctsAndService = () => {
     historyHook("/services");
-  }
+  };
   const hendleReportedList = () => {
     historyHook("/reported-sites");
   };
 
   const searchRelavantSpam = (event) => {
-    console.log("menu")
+    console.log("menu");
     setReturnedValues((preV) => [...preV, event.target.value]);
   };
 
@@ -164,13 +164,13 @@ export default function NavbarBeforeLogin() {
           </Box>
           <Box ml={3} mt={1}>
             <Button
-              
               size="small"
               color="inherit"
               variant="outlined"
               onClick={goToLoginPage}
               startIcon={<LoginIcon />}
-            >Login
+            >
+              <Typography sx={{ fontWeight: "bold" }}>Login</Typography>
             </Button>
           </Box>
           <Box sx={{ flexGrow: 1 }} />

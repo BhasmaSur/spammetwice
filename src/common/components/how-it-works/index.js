@@ -2,16 +2,16 @@ import { Box, Button, Grid, Typography } from '@mui/material'
 import React from 'react'
 import { howItWorks } from '../../../web/demo-data'
 
-const HowItWorks = () => {
+const HowItWorks = ({headingText}) => {
   return (
-    <Grid container spacing={0} mt={20} mb={20} justify="flex-start">
+    <Grid container p={2} spacing={0} mt={10} mb={10} justify="flex-start">
       <Grid item sm={1.5} xs={0}></Grid>
           <Grid item xs={12} sm={5}>
             <Box justifyContent={"center"}>
-              <Typography align='left' variant="h3" mb={5} >How It Works</Typography>
+              <Typography align='left' variant="h2" fontSize={headingText} sx={{ fontWeight: 'bold' }} mb={5} >How It Works</Typography>
               {howItWorks.map((work, index)=>{
                 return(
-                  <Typography align='left' variant="subtitle1">
+                  <Typography align='left' variant="h6">
                     {(index+1) + ". " + work}
               </Typography>
                 )

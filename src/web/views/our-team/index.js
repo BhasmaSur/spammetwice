@@ -17,7 +17,7 @@ function OurTeam() {
       direction="column"
     >
       <Container sx={{ padding: 3 }}>
-        <Typography variant="h4" sx={{marginTop: "20px", marginBottom: "20px", font: "bold" }}>
+        <Typography variant="h4" sx={{marginTop: "20px", marginBottom: "20px", fontWeight: "bold" }}>
           Our Amazing Team
         </Typography>
       </Container>

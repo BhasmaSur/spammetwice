@@ -34,7 +34,7 @@ const ShowCurlModal = ({ open, closeCurlModal }) => {
           <Typography align="right">
             <CancelOutlinedIcon onClick={() => handleCurlModalClose(false)}/>
           </Typography>
-          <Typography mt={"10%"} align="center">
+          <Typography mt={"10%"} align="center" sx={{ fontWeight: 'bold' }}>
             {`curl --location --request POST 'http://localhost:8080/spam/site'
 --header 'Content-Type: application/json' \
 --data-raw '{
