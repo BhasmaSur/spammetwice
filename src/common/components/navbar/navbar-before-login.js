@@ -97,15 +97,19 @@ export default function NavbarBeforeLogin() {
           </IconButton>
           <Box sx={{ flexGrow: 1 }} />
           <Box mr={2} sx={{ display: { xs: "none", md: "flex" } }}>
-            <Typography
+            {/* <Typography
               mt={1}
               variant="h5"
               noWrap
               component="div"
               sx={{ display: { xs: "none", sm: "block" } }}
             >
-              Spam Me Twice!
-            </Typography>
+              Spam Me Twic2!
+            </Typography> */}
+            <img
+              src="/assets/weblogo.png"
+              width={200}
+              />
             <Tooltip title="Home">
               <IconButton
                 size="large"

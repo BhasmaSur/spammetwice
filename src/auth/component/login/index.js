@@ -80,7 +80,7 @@ const IdpLogin = (props) => {
             elevation={-1}
             sx={{ p: 4, pb: 0, justifyContent: "center" }}>
             <Typography variant="h3" >
-              Spam-Me-Twice!
+            <img src="/assets/weblogo.png" width={200} />
             </Typography>
             <Grid container justifyContent="center" md={12} sm={12} xs={12} sx={{ p: 3, justifyContent: "center" }}>
               <img

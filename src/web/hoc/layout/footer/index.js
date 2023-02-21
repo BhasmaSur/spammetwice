@@ -31,7 +31,7 @@ const Footer = () => {
     >
       <Container sx={{ padding: 0 }}>
         <Typography xs={12} mb={5} variant="h2" fontSize={headingText} sx={{ fontWeight: 'bold' }}>
-          Spam Me Twice!
+        <img src="/assets/weblogo.png" width={200} />
         </Typography>
       </Container>
 
