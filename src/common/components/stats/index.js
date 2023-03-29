@@ -11,6 +11,8 @@ import {
   useQuery
 } from "../..";
 import { httpService } from "../../service-utils";
+
+
 const Stats = () => {
   const fetchStats = async () => {
     const res = await httpService("stats", "get", null, "user");
@@ -20,56 +22,56 @@ const Stats = () => {
 
   return (
     <Grid container spacing={3} justifyContent="center">
-      <Grid item xs={12} sm={3}>
+      <Grid item xs={10} sm={3}>
         <Paper
           sx={{
-            backgroundColor: "#F0EBE3",
+            backgroundColor: "#BAAEF7",
             paddingTop: "10px",
             paddingBottom: "10px",
           }}
         >
-          <Typography variant="h6">Spam Count</Typography>
+          <Typography sx={{fontWeight: 1000}} variant="h6">Spam Count</Typography>
           <Box>
             <IconButton size="large" color="inherit" aria-label="open drawer">
               <PhishingRoundedIcon />
             </IconButton>
           </Box>
-          <Typography variant="h4">{data?.result?.spamCount}</Typography>
+          <Typography sx={{fontWeight: 1000}} variant="h4">{data?.result?.spamCount}</Typography>
         </Paper>
       </Grid>
-      <Grid item xs={12} sm={3}>
+      <Grid item xs={10} sm={3}>
         <Paper
           sx={{
-            backgroundColor: "#F0EBE3",
+            backgroundColor: "#BAAEF7",
             paddingTop: "10px",
             paddingBottom: "10px",
           }}
         >
-          <Typography variant="h6">URLs Count</Typography>
+          <Typography sx={{fontWeight: 1000}} variant="h6">URLs Count</Typography>
 
           <Box>
             <IconButton size="large" color="inherit" aria-label="open drawer">
               <LinkIcon />
             </IconButton>
           </Box>
-          <Typography variant="h4">{data?.result?.urlsCount}</Typography>
+          <Typography sx={{fontWeight: 1000}}  variant="h4">{data?.result?.urlsCount}</Typography>
         </Paper>
       </Grid>
-      <Grid item xs={12} sm={3}>
+      <Grid item xs={10} sm={3}>
         <Paper
           sx={{
-            backgroundColor: "#F0EBE3",
+            backgroundColor: "#BAAEF7",
             paddingTop: "10px",
             paddingBottom: "10px",
           }}
         >
-          <Typography variant="h6">Users Count</Typography>
+          <Typography sx={{fontWeight: 1000}} variant="h6">Users Count</Typography>
           <Box>
             <IconButton size="large" color="inherit" aria-label="open drawer">
               <GroupIcon />
             </IconButton>
           </Box>
-          <Typography variant="h4">{data?.result?.usersCount}</Typography>
+          <Typography sx={{fontWeight: 1000}} variant="h4">{data?.result?.usersCount}</Typography>
         </Paper>
       </Grid>
     </Grid>

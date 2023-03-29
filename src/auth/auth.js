@@ -1,8 +1,8 @@
-import CookieUtil from './cookie-util';
-// import moment from 'moment';
-// import jwtDecode from 'jwt-decode';
-import isEmpty from 'lodash/isEmpty';
-import includes from 'lodash/includes';
+import CookieUtil from "./cookie-util";
+import moment from "moment";
+import jwtDecode from "jwt-decode";
+import isEmpty from "lodash/isEmpty";
+import includes from "lodash/includes";
 
 const auth = () => {
   const { getCookies, setAppCookie, removeAppCookie } = CookieUtil();
@@ -64,28 +64,36 @@ const auth = () => {
 
   // const login = () => {};
 
-  const logout = async (userErrorMsg = '') => {
-      removeAllAppCookies();
+  const logout = async (userErrorMsg = "") => {
+    removeAllAppCookies();
   };
 
   const removeAllAppCookies = (exceptions = []) => {
-    const allCookies = ['access_token', 'refresh_token', 'user', 'tenantId', 's3'];
+    const allCookies = [
+      "access_token",
+      "refresh_token",
+      "user",
+      "tenantId",
+      "s3",
+    ];
 
-    allCookies.forEach((cookie) => !includes(exceptions, cookie) && removeAppCookie(cookie));
+    allCookies.forEach(
+      (cookie) => !includes(exceptions, cookie) && removeAppCookie(cookie)
+    );
   };
 
   const setUserData = (user) => {
     delete user.objectPermissions;
-    setAppCookie('user', JSON.stringify(user));
+    setAppCookie("user", JSON.stringify(user));
   };
 
   const setTenantData = (tenantName) => {
-    setAppCookie('tenantId', tenantName);
+    setAppCookie("tenantId", tenantName);
   };
 
   const setTokenData = (tokenData) => {
-    setAppCookie('access_token', tokenData.access_token);
-    setAppCookie('refresh_token', tokenData.refresh_token);
+    setAppCookie("access_token", tokenData.access_token);
+    setAppCookie("refresh_token", tokenData.refresh_token);
   };
 
   // const setS3 = (s3Url) => {
@@ -100,25 +108,33 @@ const auth = () => {
         // const { data, status } = await ObjectPermissionService.getObjectPermissions({
         //   roles: user.roles,
         // });
-        const { data, status} = {
-          data : "dont know what to put",
-          status : 200
-        }
+        const { data, status } = {
+          data: "dont know what to put",
+          status: 200,
+        };
         if (status === 200 && data) {
           return data;
         } else {
           removeAllAppCookies();
-          window.location = '/login';
+          window.location = "/login";
         }
       } catch (e) {
         removeAllAppCookies();
-        window.location = '/login';
+        window.location = "/login";
       }
     }
   };
 
   const getSessionData = () => {
-    const cookies = getCookies();
+    let cookies = getCookies();
+    if (!isEmpty(cookies.user)) {
+      let decodedAccessToken = jwtDecode(cookies.access_token);
+      let expOfAccessToken = decodedAccessToken.exp;
+      let now = moment().unix();
+      if (expOfAccessToken < now) {
+        cookies = {};
+      }
+    }
     return {
       accessToken: cookies.access_token,
       refreshToken: cookies.refresh_token,

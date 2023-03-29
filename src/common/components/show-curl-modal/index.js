@@ -1,6 +1,7 @@
 import { Box, Modal, Typography } from "@mui/material";
 import React from "react";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 
 const ShowCurlModal = ({ open, closeCurlModal }) => {
   const matches = useMediaQuery("(max-width:600px)");
@@ -18,24 +19,30 @@ const ShowCurlModal = ({ open, closeCurlModal }) => {
     p: 4,
     overflow: "auto",
   };
-  const handleEditAdClose = () => {
+  const handleCurlModalClose = () => {
     closeCurlModal(false);
   };
   return (
     <>
       <Modal
         open={open}
-        onClose={() => handleEditAdClose(false)}
+        onClose={() => handleCurlModalClose(false)}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography align="center">
+          <Typography align="right">
+            <CancelOutlinedIcon onClick={() => handleCurlModalClose(false)}/>
+          </Typography>
+          <Typography mt={"10%"} align="center" sx={{ fontWeight: 'bold' }}>
             {`curl --location --request POST 'http://localhost:8080/spam/site'
 --header 'Content-Type: application/json' \
 --data-raw '{
     "baseUrl": "https://local.com"
 }'`}
+          </Typography>
+          <Typography mt={"10%"} align="center">
+            Copy the curl above, and change the value of baseUrl
           </Typography>
         </Box>
       </Modal>

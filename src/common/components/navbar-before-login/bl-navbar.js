@@ -73,7 +73,7 @@ const BLNavbar = () => {
           </IconButton>
           <Box>
             <Typography variant="h5" mr={1}  mt={1}  noWrap component="div">
-              Spam Me Twice!
+              <img src="/assets/weblogo.png" width={200} />
             </Typography>
           </Box>
           <Box

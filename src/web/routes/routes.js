@@ -27,6 +27,7 @@ import ProductServices from "../views/product-services";
 import { FreeLayout } from "../hoc";
 import EditAdPage from "../views/edit-ad-page";
 import NavbarLayout from "../../common/components/navbar-layout";
+import EditSpam from "../views/edit-spam";
 
 const GuardedRoutesBehindFeatureFlag = () => {
   const flags = {
@@ -38,6 +39,7 @@ const GuardedRoutesBehindFeatureFlag = () => {
         <Route path="/admin-page" element={<Test />} exact />
         <Route path="/spam-page" element={<LandingPage />} exact />
         <Route path="/add-spam" element={<AddSpam />} exact />
+        <Route path="/edit-spam" element={<EditSpam />} exact />
         <Route path="/user-profile" element={<UserProfile />} exact />
         <Route path="*" element={<NotFound />} exact />
       </Routes>

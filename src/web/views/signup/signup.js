@@ -15,6 +15,7 @@ import "./idplogin.css";
 import { useNavigate } from 'react-router-dom';
 
 import CopyrightIcon from "@mui/icons-material/Copyright";
+import { signUpValidations, userNameValidation } from '../../../common/validations';
 
 const SignUp = () => {
   const [userName, setUserName] = useState("");
@@ -23,8 +24,9 @@ const SignUp = () => {
   const historyHook = useNavigate();
 
   const verifyUser = () => {
-    if ((password === confirmPassword) && userName) {
-      let signUpData = {
+    const {valid, message} = signUpValidations(userName, password, confirmPassword);
+    if(valid){
+        let signUpData = {
         username: userName,
         password: password
       }
@@ -38,6 +40,8 @@ const SignUp = () => {
           }
         }
       })
+    }else{
+      alert(message)
     }
   }
   return (
@@ -77,7 +81,7 @@ const SignUp = () => {
               elevation={-1}
               sx={{ p: 4, pb: 0, justifyContent: "center" }}>
               <Typography variant="h3" >
-                Spam-Me-Twice!
+              <img src="/assets/weblogo.png" width={200} />
               </Typography>
               <Grid container justifyContent="center" md={12} sm={12} xs={12} sx={{ p: 3, justifyContent: "center" }}>
                 <img

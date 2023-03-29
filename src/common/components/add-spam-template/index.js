@@ -15,29 +15,36 @@ const AddSpamTemplate = () => {
   const createDescriptionEntityList = () =>{
     let descriptionList = [];
     spamContent.map((desc)=>{
-      let newDesc = {
-        descContent: desc.content,
-        descType: desc.type,
-        active: 1
-    }
-    descriptionList.push(newDesc);
-    return newDesc
+      if(desc.content !== "" && desc.content !== null){
+        let newDesc = {
+          descContent: desc.content,
+          descType: desc.type,
+          active: 1
+      }
+      descriptionList.push(newDesc);
+      return newDesc
+      }
     })
     return descriptionList;
   }
   const createNewSpamObjectAndSave = () =>{
-    let newSpamObject = {
-      title: title,
-      userAd : "",
-      active : 1,
-      descriptionEntityList : createDescriptionEntityList()
-    };
-    httpService('add','post',newSpamObject, "spam").then((res)=>{
-      if(res){
-        alert("spam saved successfully")
-        historyHook("/spam", { state: { spamId: res?.data.spamId } });
-      }
-    })
+    if(title !== "" && title !== null){
+      let newSpamObject = {
+        title: title,
+        userAd : "",
+        active : 1,
+        descriptionEntityList : createDescriptionEntityList()
+      };
+      httpService('add','post',newSpamObject, "spam").then((res)=>{
+        if(res){
+          alert("spam saved successfully")
+          historyHook("/spam", { state: { spamId: res?.data.spamId } });
+        }
+      })
+    }else{
+      alert("Enter title")
+    }
+    
   }
   const handleTitleChange = (event) => {
     setTitle(event);

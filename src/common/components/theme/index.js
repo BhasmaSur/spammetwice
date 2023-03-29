@@ -1,13 +1,25 @@
 import { createTheme } from "@mui/material";
-const theme = createTheme();
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#9C8BEF",
+    },
+    secondary: {
+      main: "#987",
+    },
+  },
+  typography: {
+    fontFamily: `"Mukta", sans-serif`,
+  },
+});
 
-theme.palette.primary = {
-  main: "#890",
-};
+// theme.palette.primary = {
+//   main: "#9C8BEF",
+// };
 
-theme.palette.secondary = {
-  main: "#987"
-}
+// theme.palette.secondary = {
+//   main: "#987"
+// }
 theme.typography.h1 = {
   fontSize: "1.2rem",
   "@media (min-width:600px)": {
@@ -17,4 +29,9 @@ theme.typography.h1 = {
     fontSize: "2rem",
   },
 };
+
+// theme.typography.fontFamily =[
+//   'Dancing Script',
+//   'cursive'
+// ].join(',');
 export default theme;

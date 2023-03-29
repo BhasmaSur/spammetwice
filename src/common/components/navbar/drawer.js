@@ -55,7 +55,10 @@ const Drawer = ({ setMobileDrawerEl }) => {
           <Divider />
           <MenuItem>
             <ListItemText onClick={() => redirectTo("/home")}>
-              Spam Me Twice!
+            <img
+              src="/assets/weblogo.png"
+              width={200}
+              />
             </ListItemText>
           </MenuItem>
         </MenuList>

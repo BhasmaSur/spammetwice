@@ -10,6 +10,7 @@ import {
 } from "../../../common";
 import SiteModal from "../../../common/components/site-modal";
 import { httpService } from "../../../common/service-utils";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 function createData(name, url, reported, actions) {
   return { name, url, reported, actions };
@@ -34,6 +35,8 @@ const columns = [
 ];
 
 const ReportedSitesList = () => {
+  const matches = useMediaQuery("(max-width:600px)");
+  const headingText = matches ? "30px" : "40px";
   const [rows, setRows] = useState([]);
   const [open, setOpen] = useState(false);
   const [siteSelected, setSiteSelected] = useState({});
@@ -55,14 +58,11 @@ const ReportedSitesList = () => {
         setRows(tempRows)
       }
     })
-    // const tempRows = [createData("nasa", "https://nasa.com", 24, "View Spam"),
-    // ];
-    // setRows(tempRows);
   }, []);
   return (
     <Grid sx={{minHeight:"550px" }} container alignItems="center" justifyContent="center">
       <Grid item xs={12} sm={8}>
-        <Typography mt={5} mb={5} variant="h5">
+        <Typography mt={5} mb={5} variant="h2" fontSize={headingText} sx={{ fontWeight: 'bold' }}>
           List of Reported Pages
         </Typography>
         <Box sx={{ display: { xs: "none", sm: "none", md: "block" } }}>

@@ -1,14 +1,35 @@
-import React from "react";
-import { Box, Typography, uuidv4, Link, FirstAd,Grid } from "../..";
+import React, { useEffect } from "react";
+import { Box, Typography, uuidv4, Link, FirstAd,Grid, Paper } from "../..";
 import { SecondAd } from "../ads";
 import { DESCRIPTION_TYPE } from "../../utils/constants";
 import SpamMetaData from "../spam-metadata";
+import { useNavigate } from "react-router-dom";
+import { padding } from "@mui/system";
 
-export default function SpamTemplate({ spamData,similarSpams, metaData }) {
+const boxStyle = "1px grey #890";
+export default function SpamTemplate({checkForView = false, refreshPage,displayLike,isEditable, spamData,similarSpams, metaData}) {
   // const { title, descriptionEntityList, resolution, similarSpams } = props;
-console.log("spamData : ", spamData)
-console.log("similarSpams : ", similarSpams)
+  const historyHook = useNavigate();
+  const editSpam = () => {
+    historyHook("/edit-spam",{state:{spamToEdit: spamData}})
+  }
   const getTextContent = (content) => {
+    return (
+      <Typography
+        key={uuidv4()}
+        mt={2}
+        style={{
+          wordWrap: "break-word",
+          textAlign: "left",
+        }}
+        variant="subtitle1"
+      >
+        {content}
+      </Typography>
+    );
+  };
+
+  const getUrlContent = (content) => {
     return (
       <Typography
         key={uuidv4()}
@@ -27,7 +48,7 @@ console.log("similarSpams : ", similarSpams)
   const getImageContent = (url) => {
     return (
       <Box mt={2}>
-        <img src={url} width="100%" height="300px" />
+        <img src={url} width="80%" height="300px" />
       </Box>
     );
   };
@@ -39,16 +60,20 @@ console.log("similarSpams : ", similarSpams)
         return getImageContent(desc.descContent);
       case DESCRIPTION_TYPE.VIDEO :
         return getImageContent(desc.descContent);
+      case DESCRIPTION_TYPE.URL :
+        return getUrlContent(desc.descContent);
     }
   };
+
   // console.log(props)
   return (
-    <Grid container>
-      <Grid item sm={2} xs={0}></Grid>
-      <Grid m={2} item sm={5} xs={11}>
-        <Box sx={{ width: "100%" }}>
-          <Typography align="left" variant="h1">{spamData.title}</Typography>
-          <SpamMetaData metaData={metaData}/>
+    <Grid container mt={2} mb={2}>
+      <Grid item sm={1.4} xs={0}></Grid>
+      <Grid item sm={6} xs={12} sx={{border: boxStyle, padding: "10px"}}>
+        <Paper elevation={3} sx={{padding: 2}}>
+        <Box sx={{ width: "100%"}}>
+          <Typography mt={2} align="left" variant="h1">{spamData.title}</Typography>
+          <SpamMetaData checkForView={checkForView} refreshPage={refreshPage} displayLike={displayLike} editSpam={spamData} isEditable={isEditable} metaData={metaData}/>
           {spamData.descriptionEntityList.map((desc) => getTheDescription(desc))}
           {/* <Box mt={3}>
             <Typography align="left" variant="h1">
@@ -56,8 +81,11 @@ console.log("similarSpams : ", similarSpams)
             </Typography>
           </Box> */}
         </Box>
+        </Paper>
+        
       </Grid>
-      <Grid m={2} item sm={3} xs={11}>
+      <Grid item sm={0.2} xs={12}></Grid>
+      <Grid item sm={3} xs={12} sx={{border: boxStyle, padding : "10px"}}>
         <Typography align="left" variant="h1">
           
         </Typography>
@@ -71,6 +99,7 @@ console.log("similarSpams : ", similarSpams)
            
           );
         })}
+        <Paper elevation={3} sx={{padding: 2}}>
         <Box sx={{ width: "100%" }}
         mt={3}
         >
@@ -81,8 +110,9 @@ console.log("similarSpams : ", similarSpams)
         >
           <SecondAd adUrl={spamData.userAd}/>
         </Box>
+        </Paper>
       </Grid>
-      <Grid item sm={2} xs={0}></Grid>
+      <Grid item sm={1.4} xs={0}></Grid>
     </Grid>
   );
 }

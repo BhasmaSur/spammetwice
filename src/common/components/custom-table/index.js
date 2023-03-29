@@ -35,7 +35,7 @@ const CustomTable = ({ rows, columns, rowClicked }) => {
                   align={column.align}
                   style={{ minWidth: column.minWidth }}
                 >
-                  <Typography variant="h5">{column.label}</Typography>
+                  <Typography sx={{ fontWeight: 'bold' }} variant="h5">{column.label}</Typography>
                 </TableCell>
               ))}
             </TableRow>

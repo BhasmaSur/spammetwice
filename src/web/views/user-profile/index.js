@@ -261,7 +261,7 @@ const UserProfile = () => {
               sx={{ width: 120, height: 120 }}
             />
             <Stack direction="column">
-              <Typography variant="h45">
+              <Typography variant="h5">
                 {data?.result.username || user.userName}
               </Typography>
               <Typography align="left" variant="subtitle1">
