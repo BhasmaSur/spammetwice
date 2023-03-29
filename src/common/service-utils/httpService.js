@@ -10,7 +10,7 @@ const httpService = (
     stream = false,
     additionalConfig = {},
 ) => {
-    let BASE_URL = "http://localhost:8080"; //provide url
+    let BASE_URL = "http://103.154.233.102:8080"; //provide url
 
     const config = {
         headers: {
