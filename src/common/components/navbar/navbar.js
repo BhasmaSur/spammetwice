@@ -60,21 +60,21 @@ export default function PrimarySearchAppBar() {
     historyHook("/home");
   };
 
-  const redirectToOurTeam = () =>{
-    historyHook("/our-team")
-  }
+  const redirectToOurTeam = () => {
+    historyHook("/our-team");
+  };
   const hendleReportedList = () => {
     historyHook("/reported-sites");
   };
 
   const searchRelavantSpam = (event) => {
-    console.log("menu")
+    console.log("menu");
     setReturnedValues((preV) => [...preV, event.target.value]);
   };
 
-  const redirectToProductAndServices = () =>{
+  const redirectToProductAndServices = () => {
     historyHook("/services");
-  }
+  };
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -99,7 +99,7 @@ export default function PrimarySearchAppBar() {
               component="div"
               sx={{ display: { xs: "none", sm: "block" } }}
             >
-              Spam Me Twice1!
+              Scam Me Twice!
             </Typography> */}
             <img src="/assets/weblogo.png" width={200} />
             <Tooltip title="Home">

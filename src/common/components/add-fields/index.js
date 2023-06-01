@@ -2,7 +2,7 @@ import React from "react";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import { BUTTON_TYPE, DESCRIPTION_TYPE } from "../../utils/constants";
-import { makeStyles } from "../.."
+import { makeStyles } from "../..";
 const useStyles = makeStyles((theme) => ({
   boxStyle: {
     background: theme.palette.primary.main,
@@ -55,7 +55,7 @@ const AddFields = ({ itemHandler }) => {
         variant="contained"
         onClick={() => itemHandler(BUTTON_TYPE.SAVE)}
       >
-        Save Spam
+        Save Scam
       </Button>
     </Box>
   );

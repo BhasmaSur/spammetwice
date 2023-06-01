@@ -10,8 +10,13 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 
 const Footer = () => {
   const historyHook = useNavigate();
+  const showNotWokingMessage = () => {
+    alert(
+      "We are currently working on our social media handles, if you want to contact us, mail us at rakshashltd@gmail.com"
+    );
+  };
   const matches = useMediaQuery("(max-width:600px)");
-  const headingText = matches ? "30px" : "40px"
+  const headingText = matches ? "30px" : "40px";
   return (
     <Grid
       bottom={0}
@@ -30,49 +35,96 @@ const Footer = () => {
       }}
     >
       <Container sx={{ padding: 0 }}>
-        <Typography xs={12} mb={5} variant="h2" fontSize={headingText} sx={{ fontWeight: 'bold' }}>
-        <img src="/assets/weblogo.png" width={200} />
+        <Typography
+          xs={12}
+          mb={5}
+          variant="h2"
+          fontSize={headingText}
+          sx={{ fontWeight: "bold" }}
+        >
+          <img src="/assets/weblogo.png" width={200} />
         </Typography>
       </Container>
 
       <Grid item sx={{ paddingBottom: 1 }}>
-        <Grid container justifyContent="center" columnSpacing={0} rowSpacing={0}>
-          <Grid sx={{ fontSize:20 }} mb={0.5} item xs={12} sm={3} md={1} onClick={()=>historyHook("/")}>
+        <Grid
+          container
+          justifyContent="center"
+          columnSpacing={0}
+          rowSpacing={0}
+        >
+          <Grid
+            sx={{ fontSize: 20 }}
+            mb={0.5}
+            item
+            xs={12}
+            sm={3}
+            md={1}
+            onClick={() => historyHook("/")}
+          >
             Home
           </Grid>
-          <Grid sx={{ fontSize:20 }} mb={0.5} item xs={12} sm={3} md={1} onClick={()=>historyHook("/services")}>
+          <Grid
+            sx={{ fontSize: 20 }}
+            mb={0.5}
+            item
+            xs={12}
+            sm={3}
+            md={1}
+            onClick={() => historyHook("/services")}
+          >
             Our Product & Services
           </Grid>
-          <Grid sx={{ fontSize:20 }} mb={0.5} item xs={12} sm={3} md={1} onClick={()=>historyHook("/reported-sites")}>
+          <Grid
+            sx={{ fontSize: 20 }}
+            mb={0.5}
+            item
+            xs={12}
+            sm={3}
+            md={1}
+            onClick={() => historyHook("/reported-sites")}
+          >
             Reported Sites
           </Grid>
-          <Grid sx={{ fontSize:20 }} item xs={12} sm={3} md={1} onClick={()=>historyHook("/our-team")}>
+          <Grid
+            sx={{ fontSize: 20 }}
+            item
+            xs={12}
+            sm={3}
+            md={1}
+            onClick={() => historyHook("/our-team")}
+          >
             Our Team
           </Grid>
         </Grid>
       </Grid>
 
       <Grid item sx={{ padding: 3 }}>
-        <Grid container justifyContent="center" columnSpacing={1} rowSpacing={1}>
+        <Grid
+          container
+          justifyContent="center"
+          columnSpacing={1}
+          rowSpacing={1}
+        >
           <Grid item xs={2} sm={1} md={0.5}>
-          <IconButton color="inherit">
-            <FacebookIcon />
-          </IconButton>
+            <IconButton onClick={showNotWokingMessage} color="inherit">
+              <FacebookIcon />
+            </IconButton>
           </Grid>
           <Grid item xs={2} sm={1} md={0.5}>
-          <IconButton color="inherit">
-            <TwitterIcon />
-          </IconButton>
+            <IconButton onClick={showNotWokingMessage} color="inherit">
+              <TwitterIcon />
+            </IconButton>
           </Grid>
           <Grid item xs={2} sm={1} md={0.5}>
-          <IconButton color="inherit">
-            <InstagramIcon />
-          </IconButton>
+            <IconButton onClick={showNotWokingMessage} color="inherit">
+              <InstagramIcon />
+            </IconButton>
           </Grid>
           <Grid item xs={2} sm={1} md={0.5}>
-          <IconButton color="inherit">
-            <LinkedInIcon />
-          </IconButton>
+            <IconButton onClick={showNotWokingMessage} color="inherit">
+              <LinkedInIcon />
+            </IconButton>
           </Grid>
         </Grid>
       </Grid>

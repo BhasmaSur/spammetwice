@@ -68,7 +68,7 @@ const UserProfile = () => {
     return (
       <>
         <Typography align="left" mb={2} variant="subtitle2">
-          User Added Spams
+          User Added Scams
         </Typography>
         <Divider />
         {metaData?.spamEntityList?.map((spam) => {
@@ -193,10 +193,10 @@ const UserProfile = () => {
     return (
       <>
         <Typography align="left" mb={2} variant="subtitle2">
-          User Added Spams
+          User Added Urls
         </Typography>
         <Divider />
-        {metaData?.spamEntityList?.map((spam) => {
+        {metaData?.spamEntityList?.map((spam, index) => {
           return (
             <>
               {spam.urls.length > 0 && (
@@ -209,22 +209,20 @@ const UserProfile = () => {
                     variant="subtitle2"
                     component="div"
                   >
-                    {spam.spamId}
+                    {index + 1 + ". " + spam.title}
                   </Typography>
-                  <Stack direction="col">
-                    {spam.urls.map((url) => {
-                      return (
-                        <Typography
-                          align="left"
-                          mb={2}
-                          variant="subtitle2"
-                          component="div"
-                        >
-                          {url}
-                        </Typography>
-                      );
-                    })}
-                  </Stack>
+                  {spam.urls.map((url) => {
+                    return (
+                      <Typography
+                        align="left"
+                        mb={0}
+                        variant="subtitle2"
+                        component="div"
+                      >
+                        {url}
+                      </Typography>
+                    );
+                  })}
                   <Divider />
                 </>
               )}
@@ -246,6 +244,23 @@ const UserProfile = () => {
     });
   };
 
+  const countUrls = (metaData) => {
+    let urlsCount = 0;
+    metaData?.spamEntityList?.map((spam) => {
+      urlsCount = urlsCount + spam?.urls.length;
+      return spam;
+    });
+    return urlsCount;
+  };
+
+  const calculateTotalSpams = (metaData) => {
+    let spamViewCount = 0;
+    metaData?.spamEntityList?.map(
+      (spam) => (spamViewCount = spamViewCount + spam.views)
+    );
+    return spamViewCount;
+  };
+
   useEffect(() => {
     fetchDataRelatedToUser();
   }, []);
@@ -261,7 +276,7 @@ const UserProfile = () => {
               sx={{ width: 120, height: 120 }}
             />
             <Stack direction="column">
-              <Typography variant="h5">
+              <Typography align="left" variant="h5">
                 {data?.result.username || user.userName}
               </Typography>
               <Typography align="left" variant="subtitle1">
@@ -272,7 +287,7 @@ const UserProfile = () => {
               </Typography>
               <Stack direction="row">
                 <Typography variant="subtitle2" spacing={1}>
-                  Total spam views - 78
+                  Total spam views - {calculateTotalSpams(metaData)}
                 </Typography>
               </Stack>
             </Stack>
@@ -305,7 +320,7 @@ const UserProfile = () => {
               underline="hover"
               onClick={() => setTabSelected(PROFILE_TABS.SPAMS)}
             >
-              {metaData?.spamEntityList?.length} Spams
+              {metaData?.spamEntityList?.length} Scams
             </Link>
             {/* <Link
               ml={2}
@@ -321,7 +336,7 @@ const UserProfile = () => {
               underline="hover"
               onClick={() => setTabSelected(PROFILE_TABS.URLS)}
             >
-              {metaData?.reportedSitesResponses?.length} URLs Added
+              {countUrls(metaData)} URLs Added
             </Link>
           </Stack>
         </Box>

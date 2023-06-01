@@ -1,7 +1,7 @@
 import { Box, Modal, Typography } from "@mui/material";
 import React from "react";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
+import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 
 const ShowCurlModal = ({ open, closeCurlModal }) => {
   const matches = useMediaQuery("(max-width:600px)");
@@ -32,10 +32,10 @@ const ShowCurlModal = ({ open, closeCurlModal }) => {
       >
         <Box sx={style}>
           <Typography align="right">
-            <CancelOutlinedIcon onClick={() => handleCurlModalClose(false)}/>
+            <CancelOutlinedIcon onClick={() => handleCurlModalClose(false)} />
           </Typography>
-          <Typography mt={"10%"} align="center" sx={{ fontWeight: 'bold' }}>
-            {`curl --location --request POST 'http://localhost:8080/spam/site'
+          <Typography mt={"10%"} align="center" sx={{ fontWeight: "bold" }}>
+            {`curl --location --request POST 'https://spammetwice.com:8080/spam/site'
 --header 'Content-Type: application/json' \
 --data-raw '{
     "baseUrl": "https://local.com"

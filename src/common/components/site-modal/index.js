@@ -6,7 +6,7 @@ import { httpService } from "../../service-utils";
 
 const SiteModal = ({ open, handleClose, siteSelected }) => {
   const matches = useMediaQuery("(max-width:600px)");
-  const [spamsList, setSpamsList] = useState([])
+  const [spamsList, setSpamsList] = useState([]);
   const historyHook = useNavigate();
   const style = {
     position: "absolute",
@@ -20,25 +20,24 @@ const SiteModal = ({ open, handleClose, siteSelected }) => {
     borderRadius: "10px",
     boxShadow: 24,
     p: 4,
-    overflow: "auto"
+    overflow: "auto",
   };
 
-  const openSpam = (spam) =>{
-    console.log(spam)
+  const openSpam = (spam) => {
     historyHook("/spam", { state: { spamId: spam.spamId } });
-  }
+  };
 
-  useEffect(()=>{
+  useEffect(() => {
     let payload = {
-      baseUrl : siteSelected?.url
-    }
-    httpService("site", "post",payload, "spam" ).then((src)=>{
-      console.log(src)
-      if(src?.data?.status === 200){
-        setSpamsList(src?.data?.result)
+      baseUrl: siteSelected?.url,
+    };
+    httpService("site", "post", payload, "spam").then((src) => {
+      console.log(src);
+      if (src?.data?.status === 200) {
+        setSpamsList(src?.data?.result);
       }
-    })
-  },[siteSelected])
+    });
+  }, [siteSelected]);
   return (
     <>
       <Modal
@@ -61,19 +60,19 @@ const SiteModal = ({ open, handleClose, siteSelected }) => {
             </Grid>
             <Grid item xs={0} sm={2}></Grid>
           </Grid>
-          {spamsList.map((spam,index)=>{
+          {spamsList.map((spam, index) => {
             return (
-              <Grid container mt={2} mb={1} onClick={()=>openSpam(spam)}>
-              <Grid item xs={0} sm={2}></Grid>
-              <Grid item xs={12} sm={8}>
-                <Typography mb={1} align="left" variant="subtitle6">
-                  {`${index + 1}. ${spam.title}`}
-                </Typography>
-                <Divider sx={{marginTop:1}}/>
+              <Grid container mt={2} mb={1} onClick={() => openSpam(spam)}>
+                <Grid item xs={0} sm={2}></Grid>
+                <Grid item xs={12} sm={8}>
+                  <Typography mb={1} align="left" variant="subtitle6">
+                    {`${index + 1}. ${spam.title}`}
+                  </Typography>
+                  <Divider sx={{ marginTop: 1 }} />
+                </Grid>
+                <Grid item xs={0} sm={2}></Grid>
               </Grid>
-              <Grid item xs={0} sm={2}></Grid>
-            </Grid>
-            )
+            );
           })}
         </Box>
       </Modal>

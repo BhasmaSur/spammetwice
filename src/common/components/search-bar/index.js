@@ -41,8 +41,7 @@ const SearchBar = () => {
     let word = event.target.value;
     if (word === undefined || word === "") {
       setSuggestion([]);
-    }
-    else {
+    } else {
       let spamsReturned = [];
       httpService("search/" + word, "get", null, "spam").then((src) => {
         if (src.data.status === 200) {
@@ -88,7 +87,7 @@ const SearchBar = () => {
 
         <InputBase
           sx={{ ml: 1, flex: 1, p: "1px 1px" }}
-          placeholder="Search any Spam!"
+          placeholder="Search any Scam!"
           type="text"
           value={wordEntered}
           onKeyUp={(e) => {

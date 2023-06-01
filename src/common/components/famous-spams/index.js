@@ -9,10 +9,10 @@ const FamousSpams = () => {
         <Grid item xs={0} sm={2}></Grid>
         <Grid item xs={12} sm={8}>
           <Typography mb={5} align="center" variant="h6">
-            Famous Spams
+            Famous Scams
           </Typography>
           <Typography color="primary" mb={1} align="center" variant="h6">
-            Spams ({spamsList.length})
+            Scams ({spamsList.length})
           </Typography>
           <Divider />
         </Grid>
@@ -20,7 +20,15 @@ const FamousSpams = () => {
       </Grid>
       {spamsList.map((spam, index) => {
         return (
-          <Grid container ml={1} mr={1} mt={2} mb={1} display="flex" textAlign={"left"}>
+          <Grid
+            container
+            ml={1}
+            mr={1}
+            mt={2}
+            mb={1}
+            display="flex"
+            textAlign={"left"}
+          >
             <Grid item xs={0} sm={2}></Grid>
             <Grid item xs={12} sm={8}>
               <Typography mb={1} align="left" variant="subtitle6">

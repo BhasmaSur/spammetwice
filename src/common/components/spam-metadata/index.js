@@ -2,8 +2,8 @@ import { Box, Typography } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import { httpService } from "../../../common/service-utils";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
-import ThumbDownIcon from '@mui/icons-material/ThumbDown';
-import RecommendTwoToneIcon from '@mui/icons-material/RecommendTwoTone';
+import ThumbDownIcon from "@mui/icons-material/ThumbDown";
+import RecommendTwoToneIcon from "@mui/icons-material/RecommendTwoTone";
 // const metaData = {
 //     likes : 20,
 //     views : 100,
@@ -18,54 +18,63 @@ const boxStyle = {
 };
 
 const fontSize = 12;
-const SpamMetaData = ({checkForView, refreshPage, displayLike, editSpam, metaData, isEditable }) => {
+const SpamMetaData = ({
+  checkForView,
+  refreshPage,
+  displayLike,
+  editSpam,
+  metaData,
+  isEditable,
+}) => {
   const [alreadyLiked, setAlreadyLiked] = useState(false);
   const checkIfUserLikedAlready = () => {
     httpService("likes/check/" + editSpam.spamId, "get", null, "spam").then(
-        (src) => {
-          if (src) {
-            setAlreadyLiked(src.data.result)
-          }
+      (src) => {
+        if (src) {
+          setAlreadyLiked(src.data.result);
         }
-      );
+      }
+    );
   };
 
   const likeSpam = () => {
     httpService("likes/add/" + editSpam.spamId, "get", null, "spam").then(
-        (src) => {
-          if (src) {
-            refreshPage()
-          }
+      (src) => {
+        if (src) {
+          refreshPage();
         }
-      );
+      }
+    );
   };
 
   const dislikeSpam = () => {
     httpService("likes/minus/" + editSpam.spamId, "get", null, "spam").then(
-        (src) => {
-          if (src) {
-            refreshPage()
+      (src) => {
+        if (src) {
+          refreshPage();
+        }
+      }
+    );
+  };
+
+  const updateViewCount = () => {
+    httpService("views/saveView/" + editSpam.spamId, "get", null, "spam").then(
+      (src) => {
+        if (src) {
+          if (src.data.status === 200) {
+            refreshPage();
           }
         }
-      );
-  }
+      }
+    );
+  };
 
-  const updateViewCount = ()=>{
-    httpService("views/saveView/"+ editSpam.spamId, "get", null, "spam").then((src)=>{
-        if(src){
-            if(src.data.status === 200){
-                refreshPage()
-            }
-        }
-    })
-  }
-
-  useEffect(()=>{
-    checkIfUserLikedAlready()
-    if(checkForView && !isEditable){
-        updateViewCount()
+  useEffect(() => {
+    checkIfUserLikedAlready();
+    if (checkForView && !isEditable) {
+      updateViewCount();
     }
-  },[editSpam])
+  }, [editSpam, isEditable]);
   return (
     <Box sx={boxStyle}>
       <Typography fontSize={fontSize} align="left" variant="subtitle1">
@@ -76,15 +85,16 @@ const SpamMetaData = ({checkForView, refreshPage, displayLike, editSpam, metaDat
       </Typography>
       {displayLike && (
         <Typography align="left" variant="subtitle2">
-          {!alreadyLiked && <RecommendTwoToneIcon
-          onClick={likeSpam}
-            fontSize={"medium"}
-          />}
-          {alreadyLiked && <RecommendTwoToneIcon 
-          onClick={dislikeSpam}
-          color={"primary"}
-          fontSize={"medium"}
-          />}
+          {!alreadyLiked && (
+            <RecommendTwoToneIcon onClick={likeSpam} fontSize={"medium"} />
+          )}
+          {alreadyLiked && (
+            <RecommendTwoToneIcon
+              onClick={dislikeSpam}
+              color={"primary"}
+              fontSize={"medium"}
+            />
+          )}
         </Typography>
       )}
       {/* {isEditable && <Typography onClick={editSpam} fontSize={fontSize} align='left' variant='subtitle1'>
