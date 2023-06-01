@@ -104,12 +104,9 @@ export default function NavbarBeforeLogin() {
               component="div"
               sx={{ display: { xs: "none", sm: "block" } }}
             >
-              Spam Me Twic2!
+              Scam Me Twice!
             </Typography> */}
-            <img
-              src="/assets/weblogo.png"
-              width={200}
-              />
+            <img src="/assets/weblogo.png" width={200} />
             <Tooltip title="Home">
               <IconButton
                 size="large"

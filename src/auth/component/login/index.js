@@ -7,7 +7,7 @@ import {
   Box,
   Grid,
   InputField,
-  makeStyles
+  makeStyles,
 } from "../../../common";
 import "./idplogin.css";
 import { httpService } from "../../../common/service-utils";
@@ -21,8 +21,8 @@ const IdpLogin = (props) => {
   const historyHook = useNavigate();
 
   const handleSignUp = () => {
-    historyHook("/signup")
-  }
+    historyHook("/signup");
+  };
 
   const verifyUser = async () => {
     if (!userName) {
@@ -33,38 +33,38 @@ const IdpLogin = (props) => {
     }
     const loginData = {
       username: userName,
-      password
-    }
-    const { status, data } = await httpService('authenticate', 'post', loginData);
+      password,
+    };
+    const { status, data } = await httpService(
+      "authenticate",
+      "post",
+      loginData
+    );
     if (data?.status === 200) {
       onSuccess({
         user: data.result,
-        isLoggedIn: true
-      })
+        isLoggedIn: true,
+      });
     } else {
-      alert("Login failed")
+      alert("Login failed");
     }
   };
   return (
     <Grid container gap={0} sx={{ mt: 5, justifyContent: "center" }}>
-      <Grid item md={6} sx={{ display: { xs: "none", md: "block" }, p: 0, mt: 5 }}>
-        <img
-          alt="lol"
-          width="90%"
-          height="90%"
-          src="/assets/signup_left.png"
-        />
-
+      <Grid
+        item
+        md={6}
+        sx={{ display: { xs: "none", md: "block" }, p: 0, mt: 5 }}
+      >
+        <img alt="lol" width="90%" height="90%" src="/assets/signup_left.png" />
       </Grid>
 
       <Grid item sx={{ display: { xs: "none", md: "block" }, p: 0 }}>
         <Divider orientation="vertical" />
-      </Grid >
+      </Grid>
       <Grid item md={4} sm={12} xs={12} sx={{ mt: 5 }}>
         <Box
-
           sx={{
-
             display: "flex",
             justifyContent: "center",
             flexWrap: "wrap",
@@ -74,65 +74,64 @@ const IdpLogin = (props) => {
             },
           }}
         >
-
-
-          <Paper
-            elevation={-1}
-            sx={{ p: 4, pb: 0, justifyContent: "center" }}>
-            <Typography variant="h3" >
-            <img src="/assets/weblogo.png" width={200} />
+          <Paper elevation={-1} sx={{ p: 4, pb: 0, justifyContent: "center" }}>
+            <Typography variant="h3">
+              <img src="/assets/weblogo.png" width={200} />
             </Typography>
-            <Grid container justifyContent="center" md={12} sm={12} xs={12} sx={{ p: 3, justifyContent: "center" }}>
-              <img
-                alt="lol"
-                width="40%"
-                src="/assets/logo.png"
-              />
+            <Grid
+              container
+              justifyContent="center"
+              md={12}
+              sm={12}
+              xs={12}
+              sx={{ p: 3, justifyContent: "center" }}
+            >
+              <img alt="lol" width="40%" src="/assets/logo.png" />
             </Grid>
-            <Grid container direction="column" gap={2} sx={{ justifyContent: "center" }}>
-              <Grid item >
-
+            <Grid
+              container
+              direction="column"
+              gap={2}
+              sx={{ justifyContent: "center" }}
+            >
+              <Grid item>
                 <TextField
                   size="small"
                   type="text"
                   label="Email / Username"
                   variant="outlined"
-                  onChange={(event)=>setUserName(event.target.value)}
+                  onChange={(event) => setUserName(event.target.value)}
                 />
               </Grid>
 
-              <Grid item >
+              <Grid item>
                 <TextField
                   size="small"
                   type="password"
                   label="Password"
                   variant="outlined"
-                  onChange={(event)=>setPassword(event.target.value)}
+                  onChange={(event) => setPassword(event.target.value)}
                 />
               </Grid>
 
               <Grid item md={4}>
-                <Button
-
-                  size="small"
-
-                  variant="contained"
-                  onClick={verifyUser}
-
-                >
-                  <Typography variant="h7" sx={{ color: "white" }} >
+                <Button size="small" variant="contained" onClick={verifyUser}>
+                  <Typography variant="h7" sx={{ color: "white" }}>
                     login
                   </Typography>
                 </Button>
               </Grid>
               <Grid item md={12}>
-                <Typography variant="body2"  >
-                  Not registered yet? <Button sx={{ p: 0 }} onClick={handleSignUp}>Create an account.</Button>
+                <Typography variant="body2">
+                  Not registered yet?{" "}
+                  <Button sx={{ p: 0 }} onClick={handleSignUp}>
+                    Create an account.
+                  </Button>
                 </Typography>
               </Grid>
               <Grid item md={12} sx={{ mt: 3 }}>
-                <Typography variant="caption" >
-                  <CopyrightIcon fontSize="2px" /> 2022 SpameMeTwice. All Rights
+                <Typography variant="caption">
+                  <CopyrightIcon fontSize="2px" /> 2022 ScamMeTwice. All Rights
                   Reserved.
                 </Typography>
               </Grid>
@@ -140,7 +139,7 @@ const IdpLogin = (props) => {
           </Paper>
         </Box>
       </Grid>
-    </Grid >
+    </Grid>
   );
 };
 

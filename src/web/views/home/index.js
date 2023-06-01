@@ -36,11 +36,11 @@ function Home() {
               fontSize={websiteNameText}
               color={"primary"}
             >
-              Spam You Twice!!
+              Scam You Twice!!
             </Typography>
             <Typography variant="h5" mt={2} mb={2}>
-              We are in a constant fight with all kinds of spammers. Be it email
-              spams, calling spams, spam websites etc, our team is working hard
+              We are in a constant fight with all kinds of scammers. Be it email
+              scams, calling scams, scam websites etc, our team is working hard
               to track them down and making this information public to the
               world.
             </Typography>
